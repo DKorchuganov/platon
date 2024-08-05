@@ -18,12 +18,18 @@ fun main() {
         }
     }
 
+    val nameQuestions = listOf(
+        "What is your name? ",
+        "Как тебя зовут? "
+    )
+    val langIndex = lang.toInt() - 1
+    print(nameQuestions[langIndex])
+
+
     if (lang == "1") {
-        print("What is your name? ")
         val name = readln()
         println("Hello $name!")
     } else {
-        print("Как тебя зовут? ")
         val name = readln()
         println("Привет $name!")
     }
