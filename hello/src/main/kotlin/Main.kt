@@ -24,13 +24,12 @@ fun main() {
     )
     val langIndex = lang.toInt() - 1
     print(nameQuestions[langIndex])
+    val name = readln()
 
+    val greetings = listOf(
+        "Hello $name!",
+        "Привет $name!"
+    )
+    println(greetings[langIndex])
 
-    if (lang == "1") {
-        val name = readln()
-        println("Hello $name!")
-    } else {
-        val name = readln()
-        println("Привет $name!")
-    }
 }
