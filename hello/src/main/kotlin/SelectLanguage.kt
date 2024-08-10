@@ -7,12 +7,21 @@ fun selectLanguage(): String {
         "Select your language",
         "Выберете ваш язык"
     )
+
+    val languages = listOf(
+        "English",
+        "русский"
+    )
+
     while ((lang != "1") and (lang != "2")) {
         select.forEach {
             println(it)
         }
-        println("1 - English")
-        println("2 - русский")
+        languages.forEachIndexed { index, language ->
+            val count = index + 1
+            println("$count - $language")
+        }
+
         print("Your choice / Ваш выбор:")
         lang = readln()
         println()
