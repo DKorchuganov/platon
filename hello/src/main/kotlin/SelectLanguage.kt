@@ -35,22 +35,14 @@ fun selectLanguage(): String {
             println("$count - $language")
         }
 
-        for (index in 0..(choices.size - 2)) {
-            val choice = choices[index]
-            print("$choice / ")
-        }
-        print("${choices[choices.size - 1]}: ")
+        printSeparated(choices, " / ", ": ")
 
         lang = readln()
         println()
 
         if (((lang != "1") and (lang != "2"))) {
             print("$lang: ")
-            for (index in 0..(unknowns.size - 2)) {
-                val unknown = unknowns[index]
-                print("$unknown / ")
-            }
-            println("${unknowns[unknowns.size - 1]}!")
+            printSeparated(unknowns, " / ", "!\n")
         }
     }
 
