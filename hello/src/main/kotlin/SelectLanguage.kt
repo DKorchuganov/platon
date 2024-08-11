@@ -20,6 +20,11 @@ fun selectLanguage(): String {
         "Ваш выбор"
     )
 
+    val unknowns = listOf(
+        "unknown language",
+        "неизвестный язык"
+    )
+
     while ((lang != "1") and (lang != "2")) {
         select.forEach {
             println(it)
@@ -39,8 +44,13 @@ fun selectLanguage(): String {
         lang = readln()
         println()
 
-        if ( ((lang != "1") and (lang != "2")) ) {
-            println("$lang: unknown language / неизвестный язык!")
+        if (((lang != "1") and (lang != "2"))) {
+            print("$lang: ")
+            for (index in 0..(unknowns.size - 2)) {
+                val unknown = unknowns[index]
+                print("$unknown / ")
+            }
+            println("${unknowns[unknowns.size - 1]}!")
         }
     }
 
