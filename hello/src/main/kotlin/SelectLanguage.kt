@@ -1,3 +1,5 @@
+@file:Suppress("KotlinConstantConditions")
+
 package com.jvmlab.platon
 
 fun selectLanguage(): String {
@@ -22,20 +24,21 @@ fun selectLanguage(): String {
         select.forEach {
             println(it)
         }
+
         languages.forEachIndexed { index, language ->
             val count = index + 1
             println("$count - $language")
         }
 
-        choices.forEachIndexed { index, choice ->
-            print(choice)
-            if (index != choices.size - 1) {
-                print(" / ")
-            }
+        for (index in 0..(choices.size - 2)) {
+            val choice = choices[index]
+            print("$choice / ")
         }
-        print(": ")
+        print("${choices[choices.size - 1]}: ")
+
         lang = readln()
         println()
+
         if ( ((lang != "1") and (lang != "2")) ) {
             println("$lang: unknown language / неизвестный язык!")
         }
