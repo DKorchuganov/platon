@@ -7,3 +7,10 @@ fun printSeparated(list: List<String>, separator: String, suffix: String) {
     }
     print(list.last() + suffix)
 }
+
+
+fun printColumn(list: List<String>) {
+    list.forEach {
+        println(it)
+    }
+}

@@ -26,14 +26,13 @@ fun selectLanguage(): String {
     )
 
     while ((lang != "1") and (lang != "2")) {
-        select.forEach {
-            println(it)
-        }
+        printColumn(select)
 
-        languages.forEachIndexed { index, language ->
-            val count = index + 1
-            println("$count - $language")
-        }
+        printColumn(
+            languages.mapIndexed { index, s ->
+                "${index + 1} - $s"
+            }
+        )
 
         printSeparated(choices, " / ", ": ")
 
