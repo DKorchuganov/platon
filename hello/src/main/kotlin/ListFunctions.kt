@@ -14,3 +14,10 @@ fun printColumn(list: List<String>) {
         println(it)
     }
 }
+
+
+fun checkLang(list: List<String>, lang: String): Boolean {
+    return list.indices.toList().map {
+        (it + 1).toString()
+    }.contains(lang)
+}

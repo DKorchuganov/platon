@@ -7,25 +7,29 @@ fun selectLanguage(): String {
 
     val select = listOf(
         "Select your language",
-        "Выберете ваш язык"
+        "Выберите ваш язык",
+        "Wählen Sie Ihre Sprache"
     )
 
     val languages = listOf(
         "English",
-        "русский"
+        "русский",
+        "Deutsch"
     )
 
     val choices = listOf(
         "Your choice",
-        "Ваш выбор"
+        "Ваш выбор",
+        "Ihre Wahl"
     )
 
     val unknowns = listOf(
         "unknown language",
-        "неизвестный язык"
+        "неизвестный язык",
+        "unbekannte Sprache"
     )
 
-    while ((lang != "1") and (lang != "2")) {
+    while (!checkLang(select, lang)) {
         printColumn(select)
 
         printColumn(
@@ -39,7 +43,7 @@ fun selectLanguage(): String {
         lang = readln()
         println()
 
-        if (((lang != "1") and (lang != "2"))) {
+        if (!checkLang(select, lang)) {
             print("$lang: ")
             printSeparated(unknowns, " / ", "!\n")
         }
