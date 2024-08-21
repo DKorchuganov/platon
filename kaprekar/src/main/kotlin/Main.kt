@@ -5,24 +5,24 @@ fun main() {
 
     var input = ""
 
-    while (!((input.length == 4)&&(input.all { it.isDigit() }))) {
-        print("Enter 4-digit number: ")
+    while (!((input.isNotEmpty())&&(input.all { it.isDigit() }))) {
+        print("Enter number: ")
         input = readln()
-        if (input.all { it == input[0] }) {
+        if ((input.length > 1)&&input.all { it == input[0] }) {
             println()
             println("All characters should not be the same!")
             input = ""
         }
     }
 
-    var result = input.toInt()
-    var oldResult = 0
+    var result = input.toLong()
+    val oldResult: MutableList<Long> = mutableListOf()
 
-    while (result != oldResult) {
-        oldResult = result
-        val list = result.toString().padStart(4, '0').toList()
-        val small = list.sorted().joinToString("").toInt()
-        val big = list.sortedDescending().joinToString("").toInt()
+    while (!oldResult.contains(result)) {
+        oldResult.add(result)
+        val list = result.toString().padStart(input.length, '0').toList()
+        val small = list.sorted().joinToString("").toLong()
+        val big = list.sortedDescending().joinToString("").toLong()
         result = big - small
         println("$big - $small = $result")
     }
