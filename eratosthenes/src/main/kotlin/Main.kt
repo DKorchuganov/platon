@@ -16,9 +16,18 @@ fun main() {
     }
   }
 
+  val size = input.toInt()
+  if (size < 3) {
+    println()
+    println("The number should be greater than 2!!!")
+    return
+  }
+
   val sieve = BooleanArray(input.toInt()) {
     true
   }
   sieve[0] = false
   sieve[1] = false
+
+  var currentPrime = 2
 }
