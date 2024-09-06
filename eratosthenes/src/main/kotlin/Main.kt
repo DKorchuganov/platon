@@ -31,6 +31,10 @@ fun main() {
 
   var currentPrime: Int? = 2
 
-  currentPrime = nextPrime(2, sieve)
-  println(currentPrime)
+  while (currentPrime != null) {
+    val divisibles = findDivisibles(currentPrime, sieve)
+    println("$currentPrime: $divisibles")
+    currentPrime = nextPrime(currentPrime, sieve)
+  }
+
 }
