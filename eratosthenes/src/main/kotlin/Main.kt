@@ -29,5 +29,8 @@ fun main() {
   sieve[0] = false
   sieve[1] = false
 
-  var currentPrime = 2
+  var currentPrime: Int? = 2
+
+  currentPrime = nextPrime(2, sieve)
+  println(currentPrime)
 }
