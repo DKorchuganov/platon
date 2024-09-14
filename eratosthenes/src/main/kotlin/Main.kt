@@ -23,7 +23,7 @@ fun main() {
     return
   }
 
-  val sieve = BooleanArray(input.toInt()) {
+  val sieve = BooleanArray(size) {
     true
   }
   sieve[0] = false
@@ -31,10 +31,13 @@ fun main() {
 
   var currentPrime: Int? = 2
 
+  var count = 0
   while (currentPrime != null) {
+    count++
     val divisibles = findDivisibles(currentPrime, sieve)
     println("$currentPrime: $divisibles")
     currentPrime = nextPrime(currentPrime, sieve)
   }
-
+  println("$count prime numbers were found")
+  println()
 }
