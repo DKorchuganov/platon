@@ -1,5 +1,7 @@
 package com.jvmlab.platon.eratosthenes
 
+import kotlin.math.sqrt
+
 
 fun main() {
 
@@ -31,10 +33,13 @@ fun main() {
 
   var currentPrime: Int? = 2
 
+  val maxFind = sqrt(size.toDouble())
   var count = 0
   while (currentPrime != null) {
     count++
-    val divisibles = findDivisibles(currentPrime, sieve)
+    val divisibles = if (currentPrime < maxFind) {
+      findDivisibles(currentPrime, sieve)
+    } else 0
     println("$currentPrime: $divisibles")
     currentPrime = nextPrime(currentPrime, sieve)
   }
