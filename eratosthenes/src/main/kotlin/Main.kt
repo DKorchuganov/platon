@@ -3,7 +3,16 @@ package com.jvmlab.platon.eratosthenes
 import kotlin.math.sqrt
 
 
-fun main() {
+fun main(args: Array<String>) {
+  val printPrimes: Boolean = if (args.isNotEmpty()) {
+    if (args[0] == "-s") {
+      false
+    } else {
+      true
+    }
+  } else {
+    true
+  }
 
   var input = ""
 
@@ -40,7 +49,9 @@ fun main() {
     val divisibles = if (currentPrime < maxFind) {
       findDivisibles(currentPrime, sieve)
     } else 0
-    println("$currentPrime: $divisibles")
+    if (printPrimes) {
+      println("$currentPrime: $divisibles")
+    }
     currentPrime = nextPrime(currentPrime, sieve)
   }
   println("$count prime numbers were found")
