@@ -39,9 +39,14 @@ fun main(args: Array<String>) {
   var currentPrime: Int? = 2
 
   val maxFind = sqrt(size.toDouble())
+  var twins = 0
   var count = 0
   while (currentPrime != null) {
     count++
+    if (sieve[currentPrime - 2]) {
+      println("${currentPrime - 2} and $currentPrime are twin primes")
+      twins++
+    }
     val divisibles = if (currentPrime < maxFind) {
       findDivisibles(currentPrime, sieve)
     } else 0
@@ -50,6 +55,15 @@ fun main(args: Array<String>) {
     }
     currentPrime = nextPrime(currentPrime, sieve)
   }
-  println("$count prime numbers were found")
+  if (count == 1) {
+    println("1 prime number was found")
+  } else {
+    println("$count prime numbers were found")
+  }
+  if (twins == 1) {
+    println("1 twin prime was found")
+  } else {
+    println("$twins twin primes were found")
+  }
   println()
 }
