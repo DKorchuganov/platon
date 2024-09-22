@@ -4,11 +4,7 @@ import kotlin.math.sqrt
 
 
 fun main(args: Array<String>) {
-  val printPrimes: Boolean = if (args.isNotEmpty()) {
-    args[0] != "-s"
-  } else {
-    true
-  }
+  val printPrimes: Boolean = ! booleanFlag('s', args)
 
   var input = ""
 
