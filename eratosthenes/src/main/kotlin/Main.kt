@@ -6,6 +6,7 @@ import kotlin.math.sqrt
 fun main(args: Array<String>) {
     val printPrimes = !booleanFlag('s', args)
     val findTwins = booleanFlag('t', args)
+    val findBalanced = booleanFlag('b', args)
 
     var input = ""
 
@@ -34,34 +35,56 @@ fun main(args: Array<String>) {
     sieve[1] = false
 
     var currentPrime: Int? = 2
+    var lastPrime = 0
+    var lastLastPrime = 0
 
     val maxFind = sqrt(size.toDouble())
-    var twins = 0
-    var count = 0
+    var countTwins = 0
+    var countPrimes = 0
+    var countBalanced = 0
+
     while (currentPrime != null) {
-        count++
+        countPrimes++
+
+        if (findBalanced && (lastPrime * 2 == lastLastPrime + currentPrime)) {
+            println("$lastPrime is a balanced prime (between $lastLastPrime and $currentPrime)")
+            countBalanced++
+        }
+
         if (findTwins && sieve[currentPrime - 2]) {
             println("${currentPrime - 2} and $currentPrime are twin primes")
-            twins++
+            countTwins++
         }
+
         val divisibles = if (currentPrime < maxFind) {
             findDivisibles(currentPrime, sieve)
         } else 0
         if (printPrimes) {
             println("$currentPrime: $divisibles")
         }
+        lastLastPrime = lastPrime
+        lastPrime = currentPrime
         currentPrime = nextPrime(currentPrime, sieve)
     }
-    if (count == 1) {
+    println()
+
+    if (countPrimes == 1) {
         println("1 prime number was found")
     } else {
-        println("$count prime numbers were found")
+        println("$countPrimes prime numbers were found")
+    }
+    if (findBalanced) {
+        if (countBalanced == 1) {
+            println("1 balanced prime was found")
+        } else {
+            println("$countBalanced balanced primes were found")
+        }
     }
     if (findTwins) {
-        if (twins == 1) {
+        if (countTwins == 1) {
             println("1 twin prime was found")
         } else {
-            println("$twins twin primes were found")
+            println("$countTwins twin primes were found")
         }
     }
     println()
