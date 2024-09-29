@@ -22,6 +22,7 @@ fun main(args: Array<String>) {
     }
 
     val size = input.toInt()
+    println(toDigits(size))
     if (size < 3) {
         println()
         println("The number should be greater than 2!!!")
