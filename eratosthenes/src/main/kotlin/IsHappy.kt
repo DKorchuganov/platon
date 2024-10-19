@@ -12,10 +12,8 @@ fun isHappy(number: Int): Boolean {
         toDigits(currentNumber).forEach {
            sum += it * it
         }
-        println(currentNumber)
         currentNumber = sum
     }
-    println(currentNumber)
 
     return currentNumber == 1
 }

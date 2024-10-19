@@ -7,6 +7,7 @@ fun main(args: Array<String>) {
     val printPrimes = !booleanFlag('s', args)
     val findTwins = booleanFlag('t', args)
     val findBalanced = booleanFlag('b', args)
+    val findHappy = booleanFlag('H', args)
 
     var input = ""
 
@@ -22,7 +23,6 @@ fun main(args: Array<String>) {
     }
 
     val size = input.toInt()
-    println(isHappy(size))
     if (size < 3) {
         println()
         println("The number should be greater than 2!!!")
@@ -43,6 +43,7 @@ fun main(args: Array<String>) {
     var countTwins = 0
     var countPrimes = 0
     var countBalanced = 0
+    var countHappy = 0
 
     while (currentPrime != null) {
         countPrimes++
@@ -63,6 +64,12 @@ fun main(args: Array<String>) {
         if (printPrimes) {
             println("$currentPrime: $divisibles")
         }
+
+        if (findHappy && isHappy(currentPrime)) {
+            println("$currentPrime is a happy prime")
+            countHappy++
+        }
+
         lastLastPrime = lastPrime
         lastPrime = currentPrime
         currentPrime = nextPrime(currentPrime, sieve)
@@ -86,6 +93,13 @@ fun main(args: Array<String>) {
             println("1 twin prime was found")
         } else {
             println("$countTwins twin primes were found")
+        }
+    }
+    if (findHappy) {
+        if (countHappy == 1) {
+            println("1 happy prime was found")
+        } else {
+            println("$countHappy happy primes were found")
         }
     }
     println()
