@@ -76,31 +76,10 @@ fun main(args: Array<String>) {
     }
     println()
 
-    if (countPrimes == 1) {
-        println("1 prime number was found")
-    } else {
-        println("$countPrimes prime numbers were found")
-    }
-    if (findBalanced) {
-        if (countBalanced == 1) {
-            println("1 balanced prime was found")
-        } else {
-            println("$countBalanced balanced primes were found")
-        }
-    }
-    if (findTwins) {
-        if (countTwins == 1) {
-            println("1 twin prime was found")
-        } else {
-            println("$countTwins twin primes were found")
-        }
-    }
-    if (findHappy) {
-        if (countHappy == 1) {
-            println("1 happy prime was found")
-        } else {
-            println("$countHappy happy primes were found")
-        }
-    }
+    printCounter(countPrimes, "prime number")
+    if (findBalanced) printCounter(countBalanced, "balanced prime")
+    if (findTwins) printCounter(countTwins, "twin prime")
+    if (findHappy) printCounter(countHappy, "happy prime")
+
     println()
 }
