@@ -42,9 +42,9 @@ fun main(args: Array<String>) {
     val maxFind = sqrt(size.toDouble())
     var countTwins = 0
     var countPrimes = 0
-    var countHappy = 0
 
     val balancedPrime = BalancedPrime()
+    val happyPrime = HappyPrime()
 
     while (currentPrime != null) {
         countPrimes++
@@ -63,10 +63,7 @@ fun main(args: Array<String>) {
             println("$currentPrime: $divisibles")
         }
 
-        if (findHappy && isHappy(currentPrime)) {
-            println("$currentPrime is a happy prime")
-            countHappy++
-        }
+        if (findHappy) happyPrime.find(currentPrime)
 
         lastLastPrime = lastPrime
         lastPrime = currentPrime
@@ -77,7 +74,7 @@ fun main(args: Array<String>) {
     printFound(countPrimes, "prime number")
     if (findBalanced) balancedPrime.printCount()
     if (findTwins) printFound(countTwins, "twin prime")
-    if (findHappy) printFound(countHappy, "happy prime")
+    if (findHappy) happyPrime.printCount()
 
     println()
 }
