@@ -42,16 +42,14 @@ fun main(args: Array<String>) {
     val maxFind = sqrt(size.toDouble())
     var countTwins = 0
     var countPrimes = 0
-    var countBalanced = 0
     var countHappy = 0
+
+    val balancedPrime = BalancedPrime()
 
     while (currentPrime != null) {
         countPrimes++
 
-        if (findBalanced && (lastPrime * 2 == lastLastPrime + currentPrime)) {
-            println("$lastPrime is a balanced prime (between $lastLastPrime and $currentPrime)")
-            countBalanced++
-        }
+        if (findBalanced) balancedPrime.find(lastLastPrime, lastPrime, currentPrime)
 
         if (findTwins && sieve[currentPrime - 2]) {
             println("${currentPrime - 2} and $currentPrime are twin primes")
@@ -76,10 +74,10 @@ fun main(args: Array<String>) {
     }
     println()
 
-    printCounter(countPrimes, "prime number")
-    if (findBalanced) printCounter(countBalanced, "balanced prime")
-    if (findTwins) printCounter(countTwins, "twin prime")
-    if (findHappy) printCounter(countHappy, "happy prime")
+    printFound(countPrimes, "prime number")
+    if (findBalanced) balancedPrime.printCount()
+    if (findTwins) printFound(countTwins, "twin prime")
+    if (findHappy) printFound(countHappy, "happy prime")
 
     println()
 }
