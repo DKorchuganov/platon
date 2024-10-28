@@ -1,15 +1,20 @@
 package com.jvmlab.platon.eratosthenes
 
-class BalancedPrime {
+class BalancedPrime : PrimeType {
     private var count = 0
+    private var lastPrime = 0
+    private var lastLastPrime = 0
 
-    fun find(lastLastPrime: Int, lastPrime: Int, currentPrime: Int) {
+
+    override fun find(currentPrime: Int) {
         if (lastPrime * 2 == lastLastPrime + currentPrime) {
             println("$lastPrime is a balanced prime (between $lastLastPrime and $currentPrime)")
             count++
         }
+        lastLastPrime = lastPrime
+        lastPrime = currentPrime
     }
 
-    fun printCount() = printFound(count, "balanced prime")
+    override fun printCount() = printFound(count, "balanced prime")
 
 }

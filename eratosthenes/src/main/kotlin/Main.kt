@@ -36,8 +36,6 @@ fun main(args: Array<String>) {
     sieve[1] = false
 
     var currentPrime: Int? = 2
-    var lastPrime = 0
-    var lastLastPrime = 0
 
     val maxFind = sqrt(size.toDouble())
     var countPrimes = 0
@@ -49,7 +47,7 @@ fun main(args: Array<String>) {
     while (currentPrime != null) {
         countPrimes++
 
-        if (findBalanced) balancedPrime.find(lastLastPrime, lastPrime, currentPrime)
+        if (findBalanced) balancedPrime.find(currentPrime)
 
         if (findTwins) twinPrime.find(currentPrime)
 
@@ -62,8 +60,6 @@ fun main(args: Array<String>) {
 
         if (findHappy) happyPrime.find(currentPrime)
 
-        lastLastPrime = lastPrime
-        lastPrime = currentPrime
         currentPrime = nextPrime(currentPrime, sieve)
     }
     println()
