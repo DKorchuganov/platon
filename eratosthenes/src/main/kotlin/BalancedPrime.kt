@@ -6,7 +6,7 @@ class BalancedPrime : PrimeType {
     private var lastLastPrime = 0
 
 
-    override fun find(currentPrime: Int) {
+    override fun process(currentPrime: Int) {
         if (lastPrime * 2 == lastLastPrime + currentPrime) {
             println("$lastPrime is a balanced prime (between $lastLastPrime and $currentPrime)")
             count++

@@ -37,34 +37,26 @@ fun main(args: Array<String>) {
 
     var currentPrime: Int? = 2
 
-    val maxFind = sqrt(size.toDouble())
-    var countPrimes = 0
-
     val balancedPrime = BalancedPrime()
     val happyPrime = HappyPrime()
     val twinPrime = TwinPrime(sieve)
+    val printPrime = PrintPrime(printPrimes, sieve, sqrt(size.toDouble()))
 
     while (currentPrime != null) {
-        countPrimes++
 
-        if (findBalanced) balancedPrime.find(currentPrime)
+        if (findBalanced) balancedPrime.process(currentPrime)
 
-        if (findTwins) twinPrime.find(currentPrime)
+        if (findTwins) twinPrime.process(currentPrime)
 
-        val divisibles = if (currentPrime < maxFind) {
-            findDivisibles(currentPrime, sieve)
-        } else 0
-        if (printPrimes) {
-            println("$currentPrime: $divisibles")
-        }
+        printPrime.process(currentPrime)
 
-        if (findHappy) happyPrime.find(currentPrime)
+        if (findHappy) happyPrime.process(currentPrime)
 
         currentPrime = nextPrime(currentPrime, sieve)
     }
     println()
 
-    printFound(countPrimes, "prime number")
+    printPrime.printCount()
     if (findBalanced) balancedPrime.printCount()
     if (findTwins) twinPrime.printCount()
     if (findHappy) happyPrime.printCount()

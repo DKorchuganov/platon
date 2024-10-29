@@ -2,7 +2,7 @@ package com.jvmlab.platon.eratosthenes
 
 interface PrimeType {
 
-    fun find(currentPrime: Int)
+    fun process(currentPrime: Int)
 
     fun printCount()
 }

@@ -3,7 +3,7 @@ package com.jvmlab.platon.eratosthenes
 class HappyPrime : PrimeType {
     private var count = 0
 
-    override fun find(currentPrime: Int) {
+    override fun process(currentPrime: Int) {
         var currentNumber = 0
         toDigits(currentPrime).forEach {
             currentNumber += it * it
