@@ -4,16 +4,12 @@ import kotlin.math.sqrt
 
 
 fun main(args: Array<String>) {
-    val printPrimes = !booleanFlag('s', args)
-    val findTwins = booleanFlag('t', args)
-    val findBalanced = booleanFlag('b', args)
-    val findHappy = booleanFlag('H', args)
 
     var input = ""
 
     while (!((input.isNotEmpty()) && (input.all { it.isDigit() }))) {
         print("Enter number (max 9 digits): ")
-        input = readln()
+        input = readln().trim()
 
         if (input.length > 9) {
             println()
@@ -35,31 +31,25 @@ fun main(args: Array<String>) {
     sieve[0] = false
     sieve[1] = false
 
+    val primeTypes = mutableListOf<PrimeType>()
+
+    if (booleanFlag('b', args)) primeTypes.add(BalancedPrime())
+    if (booleanFlag('t', args)) primeTypes.add(TwinPrime(sieve))
+    primeTypes.add(PrintPrime(!booleanFlag('s', args), sieve, sqrt(size.toDouble())))
+    if (booleanFlag('H', args)) primeTypes.add(HappyPrime())
+
     var currentPrime: Int? = 2
 
-    val balancedPrime = BalancedPrime()
-    val happyPrime = HappyPrime()
-    val twinPrime = TwinPrime(sieve)
-    val printPrime = PrintPrime(printPrimes, sieve, sqrt(size.toDouble()))
-
     while (currentPrime != null) {
-
-        if (findBalanced) balancedPrime.process(currentPrime)
-
-        if (findTwins) twinPrime.process(currentPrime)
-
-        printPrime.process(currentPrime)
-
-        if (findHappy) happyPrime.process(currentPrime)
-
+        primeTypes.forEach {
+            it.process(currentPrime!!)
+        }
         currentPrime = nextPrime(currentPrime, sieve)
     }
     println()
 
-    printPrime.printCount()
-    if (findBalanced) balancedPrime.printCount()
-    if (findTwins) twinPrime.printCount()
-    if (findHappy) happyPrime.printCount()
-
+    primeTypes.forEach {
+        it.printCount()
+    }
     println()
 }
