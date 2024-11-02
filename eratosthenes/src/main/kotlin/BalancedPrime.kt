@@ -1,10 +1,9 @@
 package com.jvmlab.platon.eratosthenes
 
-class BalancedPrime : PrimeType {
-    private var count = 0
-    private var lastPrime = 0
+class BalancedPrime : PrimeType, AnyPrime() {
+    override val name = "balanced prime"
+        private var lastPrime = 0
     private var lastLastPrime = 0
-
 
     override fun process(currentPrime: Int) {
         if (lastPrime * 2 == lastLastPrime + currentPrime) {
@@ -14,7 +13,4 @@ class BalancedPrime : PrimeType {
         lastLastPrime = lastPrime
         lastPrime = currentPrime
     }
-
-    override fun printCount() = printFound(count, "balanced prime")
-
 }

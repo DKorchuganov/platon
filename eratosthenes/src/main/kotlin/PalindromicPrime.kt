@@ -1,7 +1,7 @@
 package com.jvmlab.platon.eratosthenes
 
-class PalindromicPrime : PrimeType {
-    private var count = 0
+class PalindromicPrime : PrimeType, AnyPrime() {
+    override val name = "palindromic prime"
 
     override fun process(currentPrime: Int) {
         val digits = toDigits(currentPrime)
@@ -12,5 +12,4 @@ class PalindromicPrime : PrimeType {
         count++
     }
 
-    override fun printCount() = printFound(count, "palindromic prime")
 }

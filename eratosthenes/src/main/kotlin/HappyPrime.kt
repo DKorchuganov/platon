@@ -1,9 +1,10 @@
 package com.jvmlab.platon.eratosthenes
 
-class HappyPrime : PrimeType {
-    private var count = 0
+class HappyPrime : PrimeType, AnyPrime() {
 
-    override fun process(currentPrime: Int) {
+    override val name = "happy prime"
+
+        override fun process(currentPrime: Int) {
         var currentNumber = 0
         toDigits(currentPrime).forEach {
             currentNumber += it * it
@@ -23,7 +24,4 @@ class HappyPrime : PrimeType {
             count++
         }
     }
-
-    override fun printCount() = printFound(count, "happy prime")
-
 }

@@ -38,6 +38,7 @@ fun main(args: Array<String>) {
     primeTypes.add(PrintPrime(!booleanFlag('s', args), sieve, sqrt(size.toDouble())))
     if (booleanFlag('H', args)) primeTypes.add(HappyPrime())
     if (booleanFlag('p', args)) primeTypes.add(PalindromicPrime())
+    if (booleanFlag('e', args)) primeTypes.add(EmirpPrime(sieve))
 
     var currentPrime: Int? = 2
 

@@ -4,11 +4,11 @@ class PrintPrime(
     private val printPrimes: Boolean,
     private val  sieve: BooleanArray,
     private val maxFind: Double
-) : PrimeType {
+) : PrimeType, AnyPrime() {
 
-    private var count = 0
+    override val name = "prime number"
 
-    private fun findDivisibles(currentPrime: Int, sieve: BooleanArray): Int {
+        private fun findDivisibles(currentPrime: Int, sieve: BooleanArray): Int {
         var number = 0
         for (i in (currentPrime * 2) .. sieve.lastIndex step currentPrime) {
             if (sieve[i]) {
@@ -29,9 +29,4 @@ class PrintPrime(
         }
         count++
     }
-
-    override fun printCount() {
-      printFound(count,"prime number")
-    }
-
 }
