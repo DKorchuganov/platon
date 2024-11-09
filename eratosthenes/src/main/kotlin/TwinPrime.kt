@@ -3,10 +3,19 @@ package com.jvmlab.platon.eratosthenes
 class TwinPrime(private val sieve: BooleanArray) : PrimeType, AnyPrime() {
     override val name = "twin prime"
 
-        override fun process(currentPrime: Int) {
+    override fun process(currentPrime: Int): Boolean {
         if (sieve[currentPrime - 2]) {
-            println("${currentPrime - 2} and $currentPrime are twin primes")
             count++
+            return true
         }
+        return false
+    }
+
+    override fun processAndPrint(currentPrime: Int): Boolean {
+        if (process(currentPrime)) {
+            println("${currentPrime - 2} and $currentPrime are twin primes")
+            return true
+        }
+        return false
     }
 }

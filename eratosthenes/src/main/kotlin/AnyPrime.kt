@@ -1,10 +1,18 @@
 package com.jvmlab.platon.eratosthenes
 
-abstract class AnyPrime {
+abstract class AnyPrime : PrimeType {
     protected var count = 0
     protected abstract val name: String
 
-    fun printCount() {
+    override fun processAndPrint(currentPrime: Int): Boolean {
+        if (process(currentPrime)) {
+            println("$currentPrime is a $name")
+            return true
+        }
+        return false
+    }
+
+    override fun printCount() {
         if (count == 1) {
             println("1 $name was found")
         } else {

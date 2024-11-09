@@ -44,7 +44,7 @@ fun main(args: Array<String>) {
 
     while (currentPrime != null) {
         primeTypes.forEach {
-            it.process(currentPrime!!)
+            it.processAndPrint(currentPrime!!)
         }
         currentPrime = nextPrime(currentPrime, sieve)
     }

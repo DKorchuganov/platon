@@ -4,7 +4,7 @@ class HappyPrime : PrimeType, AnyPrime() {
 
     override val name = "happy prime"
 
-        override fun process(currentPrime: Int) {
+    override fun process(currentPrime: Int): Boolean {
         var currentNumber = 0
         toDigits(currentPrime).forEach {
             currentNumber += it * it
@@ -20,8 +20,9 @@ class HappyPrime : PrimeType, AnyPrime() {
         }
 
         if (currentNumber == 1) {
-            println("$currentPrime is a happy prime")
             count++
+            return true
         }
+        return false
     }
 }
