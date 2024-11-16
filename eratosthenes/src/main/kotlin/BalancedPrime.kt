@@ -6,7 +6,7 @@ class BalancedPrime : PrimeType, AnyPrime() {
     private var lastLastPrime = 0
 
     override fun process(currentPrime: Int): Boolean {
-        if (lastPrime * 2 == lastLastPrime + currentPrime) {
+        if (lastPrime - lastLastPrime == currentPrime - lastPrime) {
             count++
             return true
         }
