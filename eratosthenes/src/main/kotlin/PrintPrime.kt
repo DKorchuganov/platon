@@ -25,18 +25,14 @@ class PrintPrime(
         divisibles = if (currentPrime < maxFind) {
             findDivisibles(currentPrime, sieve)
         } else 0
-        if (printPrimes) {
-            println("$currentPrime: $divisibles")
-        }
         count++
         return true
     }
 
     override fun processAndPrint(currentPrime: Int): Boolean {
-        if (process(currentPrime)) {
+        if (process(currentPrime) && printPrimes) {
             println("$currentPrime: $divisibles")
-            return true
         }
-        return false
+        return true
     }
 }
