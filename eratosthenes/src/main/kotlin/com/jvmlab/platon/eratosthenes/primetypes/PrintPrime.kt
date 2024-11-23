@@ -1,4 +1,4 @@
-package com.jvmlab.platon.eratosthenes
+package com.jvmlab.platon.eratosthenes.primetypes
 
 class PrintPrime(
     private val printPrimes: Boolean,

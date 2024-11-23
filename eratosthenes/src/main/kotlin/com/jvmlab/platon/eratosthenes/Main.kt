@@ -1,5 +1,6 @@
 package com.jvmlab.platon.eratosthenes
 
+import com.jvmlab.platon.eratosthenes.primetypes.*
 import kotlin.math.sqrt
 
 

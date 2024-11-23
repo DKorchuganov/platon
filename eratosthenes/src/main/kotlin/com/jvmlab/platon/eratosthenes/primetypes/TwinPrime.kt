@@ -1,4 +1,4 @@
-package com.jvmlab.platon.eratosthenes
+package com.jvmlab.platon.eratosthenes.primetypes
 
 class TwinPrime(private val sieve: BooleanArray) : PrimeType, AnyPrime() {
     override val name = "twin prime"

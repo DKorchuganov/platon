@@ -1,4 +1,4 @@
-package com.jvmlab.platon.eratosthenes
+package com.jvmlab.platon.eratosthenes.primetypes
 
 class FactorialPrime : PrimeType, AnyPrime() {
     override val name = "factorial prime"

@@ -1,4 +1,4 @@
-package com.jvmlab.platon.eratosthenes
+package com.jvmlab.platon.eratosthenes.primetypes
 
 class BalancedPrime : PrimeType, AnyPrime() {
     override val name = "balanced prime"

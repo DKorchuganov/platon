@@ -1,4 +1,4 @@
-package com.jvmlab.platon.eratosthenes
+package com.jvmlab.platon.eratosthenes.primetypes
 
 abstract class AnyPrime : PrimeType {
     protected var count = 0

@@ -1,4 +1,6 @@
-package com.jvmlab.platon.eratosthenes
+package com.jvmlab.platon.eratosthenes.primetypes
+
+import com.jvmlab.platon.eratosthenes.toDigits
 
 class HappyPrime : PrimeType, AnyPrime() {
 
