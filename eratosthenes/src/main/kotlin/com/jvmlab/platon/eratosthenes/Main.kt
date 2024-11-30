@@ -1,11 +1,22 @@
 package com.jvmlab.platon.eratosthenes
 
+import com.jvmlab.platon.eratosthenes.options.BooleanOption
+import com.jvmlab.platon.eratosthenes.options.Parser
 import com.jvmlab.platon.eratosthenes.primetypes.*
 import kotlin.math.sqrt
 
 
 fun main(args: Array<String>) {
 
+    val parser = Parser(args, listOf(
+        BooleanOption('b', "find balanced primes"),
+        BooleanOption('t', "find twin primes"),
+        BooleanOption('s', "silent mode: don't print prime numbers", true),
+        BooleanOption('H', "find happy primes"),
+        BooleanOption('p', "find palindromic primes"),
+        BooleanOption('e', "find emirp primes"),
+        BooleanOption('f', "find factorial primes"),
+    ))
     var input = ""
 
     while (!((input.isNotEmpty()) && (input.all { it.isDigit() }))) {
@@ -34,13 +45,13 @@ fun main(args: Array<String>) {
 
     val primeTypes = mutableListOf<PrimeType>()
 
-    if (booleanFlag('b', args)) primeTypes.add(BalancedPrime())
-    if (booleanFlag('t', args)) primeTypes.add(TwinPrime(sieve))
-    primeTypes.add(PrintPrime(!booleanFlag('s', args), sieve, sqrt(size.toDouble())))
-    if (booleanFlag('H', args)) primeTypes.add(HappyPrime())
-    if (booleanFlag('p', args)) primeTypes.add(PalindromicPrime())
-    if (booleanFlag('e', args)) primeTypes.add(EmirpPrime(sieve))
-    if (booleanFlag('f', args)) primeTypes.add(FactorialPrime())
+    if (parser.getBooleanOption('b')) primeTypes.add(BalancedPrime())
+    if (parser.getBooleanOption('t')) primeTypes.add(TwinPrime(sieve))
+    primeTypes.add(PrintPrime(parser.getBooleanOption('s'), sieve, sqrt(size.toDouble())))
+    if (parser.getBooleanOption('H')) primeTypes.add(HappyPrime())
+    if (parser.getBooleanOption('p')) primeTypes.add(PalindromicPrime())
+    if (parser.getBooleanOption('e')) primeTypes.add(EmirpPrime(sieve))
+    if (parser.getBooleanOption('f')) primeTypes.add(FactorialPrime())
 
 
     var currentPrime: Int? = 2
