@@ -11,6 +11,7 @@ fun main(args: Array<String>) {
     val parser = try {
         Parser(
             args, listOf(
+                BooleanOption('h', "print this help"),
                 BooleanOption('b', "find balanced primes"),
                 BooleanOption('t', "find twin primes"),
                 BooleanOption('s', "silent mode: don't print prime numbers", true),
@@ -22,6 +23,13 @@ fun main(args: Array<String>) {
         )
     } catch (exception: IllegalArgumentException) {
         println(exception.message)
+        return
+    }
+
+    if (parser.getBooleanOption('h')) {
+        parser.booleanOptions.forEach {
+            println("-${it.shortName}: ${it.description}")
+        }
         return
     }
 
