@@ -23,7 +23,7 @@ class Parser(args: Array<String>, val booleanOptions: List<BooleanOption>) {
             if (booleanOptionsByShortName[it] != null) {
                 booleanByShortName[it] = ! booleanOptionsByShortName[it]!!.valueIfAbsent
             } else {
-                throw IllegalArgumentException("unknown option: $it")
+                throw IllegalArgumentException("Unknown option: $it")
             }
         }
     }

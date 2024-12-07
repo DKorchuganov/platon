@@ -8,15 +8,23 @@ import kotlin.math.sqrt
 
 fun main(args: Array<String>) {
 
-    val parser = Parser(args, listOf(
-        BooleanOption('b', "find balanced primes"),
-        BooleanOption('t', "find twin primes"),
-        BooleanOption('s', "silent mode: don't print prime numbers", true),
-        BooleanOption('H', "find happy primes"),
-        BooleanOption('p', "find palindromic primes"),
-        BooleanOption('e', "find emirp primes"),
-        BooleanOption('f', "find factorial primes"),
-    ))
+    val parser = try {
+        Parser(
+            args, listOf(
+                BooleanOption('b', "find balanced primes"),
+                BooleanOption('t', "find twin primes"),
+                BooleanOption('s', "silent mode: don't print prime numbers", true),
+                BooleanOption('H', "find happy primes"),
+                BooleanOption('p', "find palindromic primes"),
+                BooleanOption('e', "find emirp primes"),
+                BooleanOption('f', "find factorial primes"),
+            )
+        )
+    } catch (exception: IllegalArgumentException) {
+        println(exception.message)
+        return
+    }
+
     var input = ""
 
     while (!((input.isNotEmpty()) && (input.all { it.isDigit() }))) {
