@@ -11,7 +11,7 @@ fun main(args: Array<String>) {
     val parser = try {
         Parser(
             args, listOf(
-                BooleanOption('h', "print this help"),
+                BooleanOption('h',"help", "print this help"),
                 BooleanOption('b', "find balanced primes"),
                 BooleanOption('t', "find twin primes"),
                 BooleanOption('s', "silent mode: don't print prime numbers", true),
