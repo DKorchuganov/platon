@@ -15,6 +15,10 @@ class Parser(args: Array<String>, val booleanOptions: List<BooleanOption>) {
     private val booleanOptionsByLongName = mutableMapOf<String, BooleanOption>()
     private val booleanByOption = mutableMapOf<BooleanOption, Boolean>()
 
+    private val mutableParams = mutableListOf<String>()
+    val params
+        get() = mutableParams.toList()
+
     init {
         booleanOptions.forEach {
             if (it.shortName != null) {
@@ -38,7 +42,10 @@ class Parser(args: Array<String>, val booleanOptions: List<BooleanOption>) {
                     if (arg[index] == '-') {
                         index++
                         state = State.OPTION
-                    } else return
+                    } else {
+                        mutableParams.add(arg)
+                        return
+                    }
                 }
                 State.OPTION -> {
                     if (arg[index] == '-') {

@@ -33,7 +33,7 @@ fun main(args: Array<String>) {
         return
     }
 
-    var input = ""
+    var input = if (parser.params.isNotEmpty()) parser.params[0] else ""
 
     while (!((input.isNotEmpty()) && (input.all { it.isDigit() }))) {
         print("Enter number (max 9 digits): ")
