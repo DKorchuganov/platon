@@ -12,13 +12,14 @@ fun main(args: Array<String>) {
         Parser(
             args, listOf(
                 BooleanOption('h',"help", "print this help"),
-                BooleanOption('b', "find balanced primes"),
-                BooleanOption('t', "find twin primes"),
-                BooleanOption('s', "silent mode: don't print prime numbers", true),
-                BooleanOption('H', "find happy primes"),
-                BooleanOption('p', "find palindromic primes"),
-                BooleanOption('e', "find emirp primes"),
-                BooleanOption('f', "find factorial primes"),
+                BooleanOption('b',"balanced", "find balanced primes"),
+                BooleanOption('t',"twin", "find twin primes"),
+                BooleanOption('s',"silent", "silent mode: don't print prime numbers",
+                    true),
+                BooleanOption('H',"happy", "find happy primes"),
+                BooleanOption('p', "palindromic", "find palindromic primes"),
+                BooleanOption('e', "emirp", "find emirp primes"),
+                BooleanOption('f', "factorial", "find factorial primes"),
             )
         )
     } catch (exception: IllegalArgumentException) {
@@ -28,7 +29,10 @@ fun main(args: Array<String>) {
 
     if (parser.getBooleanOption('h')) {
         parser.booleanOptions.forEach {
-            println("-${it.shortName}: ${it.description}")
+            if (it.shortName != null) print("-${it.shortName}")
+            if (it.shortName != null && it.longName != "") print(", ")
+            if (it.longName != "") print("--${it.longName}")
+            println(": ${it.description}")
         }
         return
     }
