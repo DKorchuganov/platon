@@ -1,8 +1,9 @@
 package com.jvmlab.platon.eratosthenes.primetypes
 
+import com.jvmlab.platon.eratosthenes.Sieve
 import com.jvmlab.platon.eratosthenes.toDigits
 
-class EmirpPrime(private val sieve: BooleanArray) : PrimeType, AnyPrime() {
+class EmirpPrime(private val sieve: Sieve) : PrimeType, AnyPrime() {
     override val name = "emirp prime"
     private var emirp = 0
 
@@ -11,7 +12,7 @@ class EmirpPrime(private val sieve: BooleanArray) : PrimeType, AnyPrime() {
         toDigits(currentPrime).forEach {
             emirp = emirp * 10 + it
         }
-        if ((currentPrime > emirp) && sieve[emirp]) {
+        if ((currentPrime > emirp) && sieve.isPrime(emirp)) {
             count++
             return true
         }

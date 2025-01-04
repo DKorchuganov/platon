@@ -1,37 +1,34 @@
 package com.jvmlab.platon.eratosthenes.primetypes
 
+import com.jvmlab.platon.eratosthenes.Sieve
+
 class PrintPrime(
     private val printPrimes: Boolean,
-    private val  sieve: BooleanArray,
+    private val sieve: Sieve,
     private val maxFind: Double
 ) : PrimeType, AnyPrime() {
 
     override val name = "prime number"
-    private var divisibles = 0
 
-    private fun findDivisibles(currentPrime: Int, sieve: BooleanArray): Int {
-        var number = 0
-        for (i in (currentPrime * 2) .. sieve.lastIndex step currentPrime) {
-            if (sieve[i]) {
-                sieve[i] = false
-                number++
+    private fun findDivisibles(currentPrime: Int) {
+        for (i in (currentPrime * 2) .. sieve.primeDividers.lastIndex step currentPrime) {
+            if (sieve.isPrime(i)) {
+               sieve.primeDividers[i] = currentPrime
             }
         }
 
-        return number
+        return
     }
 
     override fun process(currentPrime: Int): Boolean {
-        divisibles = if (currentPrime < maxFind) {
-            findDivisibles(currentPrime, sieve)
-        } else 0
+        if (currentPrime < maxFind) findDivisibles(currentPrime)
         count++
         return true
     }
 
     override fun processAndPrint(currentPrime: Int): Boolean {
         if (process(currentPrime) && printPrimes) {
-            println("$currentPrime: $divisibles")
+            println("$currentPrime is a $name")
         }
         return true
     }

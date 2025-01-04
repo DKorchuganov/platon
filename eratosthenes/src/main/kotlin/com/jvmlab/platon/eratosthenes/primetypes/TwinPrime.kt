@@ -1,10 +1,12 @@
 package com.jvmlab.platon.eratosthenes.primetypes
 
-class TwinPrime(private val sieve: BooleanArray) : PrimeType, AnyPrime() {
+import com.jvmlab.platon.eratosthenes.Sieve
+
+class TwinPrime(private val sieve: Sieve ) : PrimeType, AnyPrime() {
     override val name = "twin prime"
 
     override fun process(currentPrime: Int): Boolean {
-        if (sieve[currentPrime - 2]) {
+        if (sieve.isPrime(currentPrime - 2)) {
             count++
             return true
         }

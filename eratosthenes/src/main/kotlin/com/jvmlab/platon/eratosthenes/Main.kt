@@ -57,11 +57,7 @@ fun main(args: Array<String>) {
         return
     }
 
-    val sieve = BooleanArray(size) {
-        true
-    }
-    sieve[0] = false
-    sieve[1] = false
+    val sieve = Sieve(size)
 
     val primeTypes = mutableListOf<PrimeType>()
 
@@ -73,14 +69,13 @@ fun main(args: Array<String>) {
     if (parser.getBooleanOption('e')) primeTypes.add(EmirpPrime(sieve))
     if (parser.getBooleanOption('f')) primeTypes.add(FactorialPrime())
 
-
     var currentPrime: Int? = 2
 
     while (currentPrime != null) {
         primeTypes.forEach {
             it.processAndPrint(currentPrime!!)
         }
-        currentPrime = nextPrime(currentPrime, sieve)
+        currentPrime = sieve.nextPrime(currentPrime)
     }
     println()
 
