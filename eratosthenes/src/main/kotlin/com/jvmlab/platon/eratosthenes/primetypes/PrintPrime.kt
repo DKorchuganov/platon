@@ -14,7 +14,6 @@ class PrintPrime(
         for (i in (currentPrime * 2) .. sieve.primeDividers.lastIndex step currentPrime) {
             if (sieve.isPrime(i)) {
                 sieve.primeDividers[i] = currentPrime
-                sieve.quotients[i] = i / currentPrime
             }
         }
 

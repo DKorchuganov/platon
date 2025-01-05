@@ -4,9 +4,6 @@ class Sieve(size: Int) {
     val primeDividers = IntArray(size) {
         0
     }
-    val quotients = IntArray(size) {
-        0
-    }
 
     fun isPrime(number: Int): Boolean = (primeDividers[number] == 0)
 

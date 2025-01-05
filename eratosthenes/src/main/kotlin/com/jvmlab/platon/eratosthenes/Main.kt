@@ -89,10 +89,10 @@ fun main(args: Array<String>) {
     for (i in 2 .. sieve.primeDividers.lastIndex) {
         if (! sieve.isPrime(i)) {
             print("$i = ${sieve.primeDividers[i]}")
-            var j = sieve.quotients[i]
+            var j = i / sieve.primeDividers[i]
             while (! sieve.isPrime(j)) {
                 print(" * ${sieve.primeDividers[j]}")
-                j = sieve.quotients[j]
+                j /= sieve.primeDividers[j]
             }
             println(" * $j")
         }
