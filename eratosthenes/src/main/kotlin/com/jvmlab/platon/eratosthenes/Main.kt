@@ -83,4 +83,18 @@ fun main(args: Array<String>) {
         it.printCount()
     }
     println()
+
+    println("Writing factorization")
+
+    for (i in 2 .. sieve.primeDividers.lastIndex) {
+        if (! sieve.isPrime(i)) {
+            print("$i = ${sieve.primeDividers[i]}")
+            var j = sieve.quotients[i]
+            while (! sieve.isPrime(j)) {
+                print(" * ${sieve.primeDividers[j]}")
+                j = sieve.quotients[j]
+            }
+            println(" * $j")
+        }
+    }
 }
