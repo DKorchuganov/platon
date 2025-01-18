@@ -11,7 +11,7 @@ class PrintPrime(
     override val name = "prime number"
 
     private fun findDivisibles(currentPrime: Int) {
-        for (i in (currentPrime * 2) .. sieve.primeDividers.lastIndex step currentPrime) {
+        for (i in (currentPrime * currentPrime) .. sieve.primeDividers.lastIndex step currentPrime) {
             if (sieve.isPrime(i)) {
                 sieve.primeDividers[i] = currentPrime
             }

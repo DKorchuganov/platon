@@ -3,6 +3,7 @@ package com.jvmlab.platon.eratosthenes
 import com.jvmlab.platon.eratosthenes.options.BooleanOption
 import com.jvmlab.platon.eratosthenes.options.Parser
 import com.jvmlab.platon.eratosthenes.primetypes.*
+import java.io.File
 import kotlin.math.sqrt
 
 
@@ -20,6 +21,7 @@ fun main(args: Array<String>) {
                 BooleanOption('p', "palindromic", "find palindromic primes"),
                 BooleanOption('e', "emirp", "find emirp primes"),
                 BooleanOption('f', "factorial", "find factorial primes"),
+                BooleanOption('F', "factorize", "factorize composite numbers")
             )
         )
     } catch (exception: IllegalArgumentException) {
@@ -84,17 +86,22 @@ fun main(args: Array<String>) {
     }
     println()
 
-    println("Writing factorization")
+    if (parser.getBooleanOption('F')) {
+        val fileName = "factorization.txt"
+        println("Writing factorization to $fileName")
 
-    for (i in 2 .. sieve.primeDividers.lastIndex) {
-        if (! sieve.isPrime(i)) {
-            print("$i = ${sieve.primeDividers[i]}")
-            var j = i / sieve.primeDividers[i]
-            while (! sieve.isPrime(j)) {
-                print(" * ${sieve.primeDividers[j]}")
-                j /= sieve.primeDividers[j]
+        File(fileName).printWriter().use {
+            for (i in 2..sieve.primeDividers.lastIndex) {
+                if (!sieve.isPrime(i)) {
+                    it.print("$i = ${sieve.primeDividers[i]}")
+                    var j = i / sieve.primeDividers[i]
+                    while (!sieve.isPrime(j)) {
+                        it.print(" * ${sieve.primeDividers[j]}")
+                        j /= sieve.primeDividers[j]
+                    }
+                    it.println(" * $j")
+                }
             }
-            println(" * $j")
         }
     }
 }
