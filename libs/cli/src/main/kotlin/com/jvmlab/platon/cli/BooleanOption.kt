@@ -1,4 +1,5 @@
-package com.jvmlab.platon.eratosthenes.options
+package com.jvmlab.platon.cli
+
 
 class BooleanOption(shortName: Char?, longName: String, description: String, val valueIfAbsent: Boolean = false) :
     AnyOption(shortName, longName, description) {

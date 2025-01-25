@@ -1,7 +1,7 @@
 package com.jvmlab.platon.eratosthenes
 
-import com.jvmlab.platon.eratosthenes.options.BooleanOption
-import com.jvmlab.platon.eratosthenes.options.Parser
+import com.jvmlab.platon.cli.BooleanOption
+import com.jvmlab.platon.cli.Parser
 import com.jvmlab.platon.eratosthenes.primetypes.*
 import java.io.File
 import kotlin.math.sqrt

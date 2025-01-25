@@ -1,4 +1,4 @@
-package com.jvmlab.platon.eratosthenes.options
+package com.jvmlab.platon.cli
 
 import java.lang.IllegalArgumentException
 

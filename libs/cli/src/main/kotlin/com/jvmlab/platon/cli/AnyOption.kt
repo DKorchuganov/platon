@@ -1,4 +1,4 @@
-package com.jvmlab.platon.eratosthenes.options
+package com.jvmlab.platon.cli
 
 abstract class AnyOption(
     override val shortName: Char?,

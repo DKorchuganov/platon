@@ -1,4 +1,4 @@
-package com.jvmlab.platon.eratosthenes.options
+package com.jvmlab.platon.cli
 
 interface OptionInfo {
     val shortName: Char?

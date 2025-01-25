@@ -3,3 +3,4 @@ plugins {
 }
 rootProject.name = "eratosthenes"
 
+includeBuild("../libs/cli")
