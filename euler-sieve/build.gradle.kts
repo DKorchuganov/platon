@@ -7,7 +7,7 @@ group = "com.jvmlab.platon"
 version = "1.0-SNAPSHOT"
 
 application {
-    mainClass.set("com.jvmlab.platon.eratosthenes.MainKt")
+    mainClass.set("com.jvmlab.platon.euler_sieve.MainKt")
 }
 
 repositories {
@@ -19,7 +19,6 @@ dependencies {
     testImplementation(kotlin("test"))
 }
 
-
 tasks {
     val fatJar = register<Jar>("fatJar") {
         dependsOn.addAll(listOf("compileJava", "compileKotlin", "processResources")) // We need this for Gradle optimization to work
@@ -29,13 +28,14 @@ tasks {
         val sourcesMain = sourceSets.main.get()
         val contents = configurations.runtimeClasspath.get()
             .map { if (it.isDirectory) it else zipTree(it) } +
-            sourcesMain.output
+                sourcesMain.output
         from(contents)
     }
     build {
         dependsOn(fatJar) // Trigger fat jar creation during build
     }
 }
+
 tasks.test {
     useJUnitPlatform()
 }
