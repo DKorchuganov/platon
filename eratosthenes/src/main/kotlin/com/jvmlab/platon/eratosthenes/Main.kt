@@ -30,12 +30,7 @@ fun main(args: Array<String>) {
     }
 
     if (parser.getBooleanOption('h')) {
-        parser.booleanOptions.forEach {
-            if (it.shortName != null) print("-${it.shortName}")
-            if (it.shortName != null && it.longName != "") print(", ")
-            if (it.longName != "") print("--${it.longName}")
-            println(": ${it.description}")
-        }
+        parser.printOptions()
         return
     }
 
