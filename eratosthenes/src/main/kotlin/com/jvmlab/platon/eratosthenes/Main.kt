@@ -60,7 +60,7 @@ fun main(args: Array<String>) {
 
     if (parser.getBooleanOption('b')) primeTypes.add(BalancedPrime())
     if (parser.getBooleanOption('t')) primeTypes.add(TwinPrime(sieve))
-    primeTypes.add(PrintPrime(parser.getBooleanOption('s'), sieve, sqrt(size.toDouble())))
+    primeTypes.add(PrintPrime(parser.getBooleanOption('s'), sieve))
     if (parser.getBooleanOption('H')) primeTypes.add(HappyPrime())
     if (parser.getBooleanOption('p')) primeTypes.add(PalindromicPrime())
     if (parser.getBooleanOption('e')) primeTypes.add(EmirpPrime(sieve))

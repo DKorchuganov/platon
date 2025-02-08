@@ -1,6 +1,6 @@
 package com.jvmlab.platon.eratosthenes
 
-class Sieve(size: Int) {
+class Sieve(val size: Int) {
     val primeDividers = IntArray(size) {
         0
     }
