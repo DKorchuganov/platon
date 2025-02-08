@@ -1,4 +1,4 @@
-package com.jvmlab.platon.euler_sieve
+package com.jvmlab.platon.wheel
 
 import com.jvmlab.platon.cli.BooleanOption
 import com.jvmlab.platon.cli.Parser

@@ -1,5 +1,5 @@
 plugins {
-    kotlin("jvm") version "2.0.21"
+    kotlin("jvm") version "2.1.0"
     application
 }
 
@@ -7,7 +7,7 @@ group = "com.jvmlab.platon"
 version = "1.0-SNAPSHOT"
 
 application {
-    mainClass.set("com.jvmlab.platon.euler_sieve.MainKt")
+    mainClass.set("com.jvmlab.platon.wheel.MainKt")
 }
 
 repositories {
