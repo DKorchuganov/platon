@@ -10,7 +10,7 @@ fun main(args: Array<String>) {
             args, listOf(
                 BooleanOption('h',"help", "print this help"),
                 BooleanOption('s',"silent", "silent mode: don't print prime numbers",
-                    true),
+                    false),
             )
         )
     } catch (exception: IllegalArgumentException) {
@@ -21,5 +21,34 @@ fun main(args: Array<String>) {
     if (parser.getBooleanOption('h')) {
         parser.printOptions()
         return
+    }
+
+    var input = if (parser.params.isNotEmpty()) parser.params[0] else ""
+
+    while (!((input.isNotEmpty()) && (input.all { it.isDigit() }))) {
+        print("Enter number (max 9 digits): ")
+        input = readln().trim()
+
+        if (input.length > 9) {
+            println()
+            println("Too many characters: ${input.length}")
+            input = ""
+        }
+    }
+
+    val size = input.toInt()
+    if (size < 3) {
+        println()
+        println("The number should be greater than 2!!!")
+        return
+    }
+
+    val silent = parser.getBooleanOption('s')
+    val sieve = Sieve(size)
+    var currentPrime: Long? = 7
+
+    while (currentPrime != null) {
+        if (!silent) println(currentPrime)
+        currentPrime = sieve.nextPrime()
     }
 }
