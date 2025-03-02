@@ -51,4 +51,6 @@ fun main(args: Array<String>) {
         if (!silent) println(currentPrime)
         currentPrime = sieve.nextPrime()
     }
+
+    println("\n${sieve.count} prime numbers are found\n")
 }

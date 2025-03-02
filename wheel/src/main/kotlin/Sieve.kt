@@ -8,7 +8,8 @@ class Sieve(private val size: Int) {
     private val maxFind = sqrt(size.toDouble() * 30)
     private var currentPrimeRow = 0
     private var currentPrimeColumn = 1
-
+    var count = 0
+        private set
 
     var primeCount = 3
 
@@ -27,6 +28,7 @@ class Sieve(private val size: Int) {
         while (currentPrimeRow < size) {
             while (currentPrimeColumn < 8) {
                 if (sieve[currentPrimeColumn][currentPrimeRow]) {
+                    count++
                     return (currentPrimeRow * 30 + remainderByColumn[currentPrimeColumn]).toLong()
                 }
                 currentPrimeColumn++
