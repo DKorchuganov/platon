@@ -45,11 +45,11 @@ fun main(args: Array<String>) {
 
     val silent = parser.getBooleanOption('s')
     val sieve = Sieve(size)
-    var currentPrime: Long? = 7
+    var nextPrime = true
 
-    while (currentPrime != null) {
-        if (!silent) println(currentPrime)
-        currentPrime = sieve.nextPrime()
+    while (nextPrime) {
+        if (!silent) println(sieve.currentPrime)
+        nextPrime = sieve.nextPrime()
     }
 
     println("\n${sieve.count} prime numbers are found\n")

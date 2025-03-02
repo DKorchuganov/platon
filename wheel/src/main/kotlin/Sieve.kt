@@ -4,20 +4,26 @@ import kotlin.math.sqrt
 
 class Sieve(private val size: Int) {
     private val sieve = Array(8) { BooleanArray(size) { true } }
-    private val remainderByColumn = intArrayOf(1, 7, 11, 13, 17, 19, 23, 29)
+    private val remainderByColumn = longArrayOf(1, 7, 11, 13, 17, 19, 23, 29)
+    private val columnByRemainder = intArrayOf(
+        0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 2, 0, 3, 0, 0, 0, 4, 0, 5, 0, 0, 0, 6, 0, 0, 0, 0, 0, 7
+    )
     private val maxFind = sqrt(size.toDouble() * 30)
     private var currentPrimeRow = 0
     private var currentPrimeColumn = 1
+
     var count = 0
         private set
 
-    var primeCount = 3
+    var currentPrime: Long = 7
+        private set
+
 
     init {
         sieve[0][0] = false
     }
 
-    fun nextPrime(): Long? {
+    fun nextPrime(): Boolean {
         if (currentPrimeColumn < 7) {
             currentPrimeColumn++
         } else {
@@ -29,7 +35,8 @@ class Sieve(private val size: Int) {
             while (currentPrimeColumn < 8) {
                 if (sieve[currentPrimeColumn][currentPrimeRow]) {
                     count++
-                    return (currentPrimeRow * 30 + remainderByColumn[currentPrimeColumn]).toLong()
+                    currentPrime = currentPrimeRow.toLong() * 30 + remainderByColumn[currentPrimeColumn]
+                    return true
                 }
                 currentPrimeColumn++
             }
@@ -37,7 +44,21 @@ class Sieve(private val size: Int) {
             currentPrimeRow++
         }
 
-        return null
+        return false
+    }
+
+
+    fun removeComposite() {
+        var nextNumber = currentPrime
+        var product: Long = 0
+        var productRow = 0
+        var productColumn = 0
+
+        repeat(8) {
+            product = currentPrime * nextNumber
+            productRow = (product / 30).toInt()
+            productColumn = columnByRemainder[(product % 30).toInt()]
+        }
     }
 
 }
