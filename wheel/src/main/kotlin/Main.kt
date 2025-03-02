@@ -9,8 +9,7 @@ fun main(args: Array<String>) {
         Parser(
             args, listOf(
                 BooleanOption('h',"help", "print this help"),
-                BooleanOption('s',"silent", "silent mode: don't print prime numbers",
-                    false),
+                BooleanOption('s',"silent", "silent mode: don't print prime numbers")
             )
         )
     } catch (exception: IllegalArgumentException) {
@@ -42,6 +41,7 @@ fun main(args: Array<String>) {
         println("The number should be greater than 2!!!")
         return
     }
+    println("Start searching prime numbers above 5 and below ${size * 30}")
 
     val silent = parser.getBooleanOption('s')
     val sieve = Sieve(size)
