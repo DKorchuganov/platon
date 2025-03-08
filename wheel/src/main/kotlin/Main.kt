@@ -49,6 +49,7 @@ fun main(args: Array<String>) {
 
     while (nextPrime) {
         if (!silent) println(sieve.currentPrime)
+        sieve.removeComposite()
         nextPrime = sieve.nextPrime()
     }
 

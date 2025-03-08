@@ -18,7 +18,6 @@ class Sieve(private val size: Int) {
     var currentPrime: Long = 7
         private set
 
-
     init {
         sieve[0][0] = false
     }
@@ -49,6 +48,8 @@ class Sieve(private val size: Int) {
 
 
     fun removeComposite() {
+        if (currentPrime > maxFind) return
+
         var nextNumber = currentPrime
         var product: Long = 0
         var productRow = 0
