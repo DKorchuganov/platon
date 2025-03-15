@@ -51,6 +51,8 @@ class Sieve(private val size: Int) {
         if (currentPrime > maxFind) return
 
         var nextNumber = currentPrime
+        var nextNumberRow = currentPrimeRow
+        var nextNumberColumn = currentPrimeColumn
         var product: Long = 0
         var productRow = 0
         var productColumn = 0
@@ -59,7 +61,22 @@ class Sieve(private val size: Int) {
             product = currentPrime * nextNumber
             productRow = (product / 30).toInt()
             productColumn = columnByRemainder[(product % 30).toInt()]
+
+            removeCompositeColumn(productRow, productColumn)
+
+            if (nextNumberColumn < 7) {
+                nextNumberColumn++
+            } else {
+                nextNumberColumn = 0
+                nextNumberRow++
+            }
+            nextNumber = nextNumberRow.toLong() * 30 + remainderByColumn[nextNumberColumn]
         }
+    }
+
+
+    private fun removeCompositeColumn(productRow: Int, productColumn: Int) {
+
     }
 
 }
