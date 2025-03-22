@@ -41,7 +41,7 @@ fun main(args: Array<String>) {
         println("The number should be greater than 2!!!")
         return
     }
-    println("Start searching prime numbers above 5 and below ${size * 30}")
+    println("Start searching prime numbers above 5 and below ${size.toLong() * 30}")
 
     val silent = parser.getBooleanOption('s')
     val sieve = Sieve(size)
