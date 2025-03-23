@@ -3,8 +3,16 @@ package com.jvmlab.platon.wheel
 import kotlin.math.sqrt
 
 
-private class Indices(var row: Int, var column: Int) {
+private class Indices(row: Int, column: Int) {
     private val remainderByColumn = longArrayOf(1, 7, 11, 13, 17, 19, 23, 29)
+
+    var row = row
+        private set
+
+    var column = column
+        private set
+
+    constructor(indices: Indices) : this(indices.row, indices.column)
 
     fun next() {
         if (column < 7) {
@@ -57,7 +65,7 @@ class Sieve(private val size: Int) {
         if (currentPrime > maxFind) return
 
         var nextNumber = currentPrime
-        val nextNumberIndices = Indices(currentPrimeIndices.row, currentPrimeIndices.column)
+        val nextNumberIndices = Indices(currentPrimeIndices)
         var product: Long
         var productRow: Int
         var productColumn: Int
