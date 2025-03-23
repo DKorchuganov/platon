@@ -21,7 +21,6 @@ private class Indices(var row: Int, var column: Int) {
 
 class Sieve(private val size: Int) {
     private val sieve = Array(8) { BooleanArray(size) { true } }
-    private val remainderByColumn = longArrayOf(1, 7, 11, 13, 17, 19, 23, 29)
     private val columnByRemainder = intArrayOf(
         0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 2, 0, 3, 0, 0, 0, 4, 0, 5, 0, 0, 0, 6, 0, 0, 0, 0, 0, 7
     )
@@ -42,16 +41,12 @@ class Sieve(private val size: Int) {
         currentPrimeIndices.next()
 
         while (currentPrimeIndices.row < size) {
-            while (currentPrimeIndices.column < 8) {
-                if (sieve[currentPrimeIndices.column][currentPrimeIndices.row]) {
-                    count++
-                    currentPrime = currentPrimeIndices.toNumber()
-                    return true
-                }
-                currentPrimeIndices.column++
+            if (sieve[currentPrimeIndices.column][currentPrimeIndices.row]) {
+                count++
+                currentPrime = currentPrimeIndices.toNumber()
+                return true
             }
-            currentPrimeIndices.column = 0
-            currentPrimeIndices.row ++
+            currentPrimeIndices.next()
         }
 
         return false
@@ -63,9 +58,9 @@ class Sieve(private val size: Int) {
 
         var nextNumber = currentPrime
         val nextNumberIndices = Indices(currentPrimeIndices.row, currentPrimeIndices.column)
-        var product: Long = 0
-        var productRow = 0
-        var productColumn = 0
+        var product: Long
+        var productRow: Int
+        var productColumn: Int
 
         repeat(8) {
             product = currentPrime * nextNumber
