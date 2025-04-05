@@ -60,4 +60,5 @@ fun main(args: Array<String>) {
     }
 
     println("\n${sieve.count} prime numbers are found\n")
+    println("${sieve.removeCompositeDuration.inWholeMilliseconds} ms to remove composite numbers")
 }

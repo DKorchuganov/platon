@@ -1,6 +1,8 @@
 package com.jvmlab.platon.wheel
 
 import kotlin.math.sqrt
+import kotlin.time.Duration
+import kotlin.time.TimeSource
 
 
 open class BasicSieve(private val size: Int) : Sieve {
@@ -10,6 +12,12 @@ open class BasicSieve(private val size: Int) : Sieve {
     )
     protected val maxFind = sqrt(size.toDouble() * 30)
     protected val currentPrimePosition = Position(0, 1)
+    protected var hasComposites = true
+    private val timeSource = TimeSource.Monotonic
+    protected val start = timeSource.markNow()
+
+    override var removeCompositeDuration = Duration.ZERO
+        protected set
 
     final override var count = 4
         private set
@@ -75,7 +83,13 @@ open class BasicSieve(private val size: Int) : Sieve {
 
 
     override fun removeComposite() {
-        if (currentPrimePosition.value > maxFind) return
+
+        if (! hasComposites) return
+        if (currentPrimePosition.value > maxFind) {
+            hasComposites = false
+            removeCompositeDuration = start.elapsedNow()
+            return
+        }
 
         val nextNumberPosition = Position(currentPrimePosition)
         var product: Long

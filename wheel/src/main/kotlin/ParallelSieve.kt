@@ -9,8 +9,11 @@ class ParallelSieve(size: Int) : BasicSieve(size) {
 
     override fun removeComposite() {
 
+        if (! hasComposites) return
         if (currentPrimePosition.value > maxFind) {
+            removeCompositeDuration = start.elapsedNow()
             threadPool.shutdown()
+            hasComposites = false
             return
         }
 
