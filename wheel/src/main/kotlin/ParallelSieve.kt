@@ -2,6 +2,7 @@ package com.jvmlab.platon.wheel
 
 import java.util.concurrent.Callable
 import java.util.concurrent.Executors
+import kotlin.time.Duration
 
 class ParallelSieve(size: Int) : BasicSieve(size) {
 
@@ -19,7 +20,7 @@ class ParallelSieve(size: Int) : BasicSieve(size) {
 
         val nextNumberPosition = Position(currentPrimePosition)
 
-        val tasks = mutableListOf<Callable<Unit>>()
+        val tasks = mutableListOf<Callable<Duration>>()
 
         repeat(8) {
             val product = currentPrimePosition.value * nextNumberPosition.value
@@ -27,12 +28,16 @@ class ParallelSieve(size: Int) : BasicSieve(size) {
             val productColumn = columnByRemainder[(product % 30).toInt()]
 
             tasks.add {
-                removeCompositeColumn(productRow, productColumn)
+                removeCompositeColumn(productRow, sieve[productColumn])
             }
 
             nextNumberPosition.next()
         }
 
         threadPool.invokeAll(tasks)
+        /*threadPool.invokeAll(tasks).forEach {
+            print("${it.get().inWholeMicroseconds} ")
+        }
+        println()*/
     }
 }

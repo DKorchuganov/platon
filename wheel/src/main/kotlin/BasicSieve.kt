@@ -6,7 +6,7 @@ import kotlin.time.TimeSource
 
 
 open class BasicSieve(private val size: Int) : Sieve {
-    private val sieve = Array(8) { BooleanArray(size) { true } }
+    protected val sieve = Array(8) { BooleanArray(size) { true } }
     protected val columnByRemainder = intArrayOf(
         0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 2, 0, 3, 0, 0, 0, 4, 0, 5, 0, 0, 0, 6, 0, 0, 0, 0, 0, 7
     )
@@ -101,16 +101,20 @@ open class BasicSieve(private val size: Int) : Sieve {
             productRow = (product / 30).toInt()
             productColumn = columnByRemainder[(product % 30).toInt()]
 
-            removeCompositeColumn(productRow, productColumn)
+            removeCompositeColumn(productRow, sieve[productColumn])
+            //print("${removeCompositeColumn(productRow, sieve[productColumn]).inWholeMicroseconds} ")
             nextNumberPosition.next()
         }
+        //println()
     }
 
 
-    protected fun removeCompositeColumn(productRow: Int, productColumn: Int) {
-        for (row in productRow .. sieve[productColumn].lastIndex step currentPrimePosition.value.toInt()) {
-            sieve[productColumn][row] = false
+    protected fun removeCompositeColumn(productRow: Int, productColumnArray: BooleanArray): Duration {
+        val startFun = timeSource.markNow()
+        for (row in productRow .. productColumnArray.lastIndex step currentPrimePosition.value.toInt()) {
+            productColumnArray[row] = false
         }
+        return startFun.elapsedNow()
     }
 
 }
