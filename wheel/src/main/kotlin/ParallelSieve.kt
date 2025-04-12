@@ -10,7 +10,6 @@ class ParallelSieve(size: Int) : BasicSieve(size) {
 
     override fun removeComposite() {
 
-        if (! hasComposites) return
         if (currentPrimePosition.value > maxFind) {
             removeCompositeDuration = start.elapsedNow()
             threadPool.shutdown()
@@ -20,7 +19,7 @@ class ParallelSieve(size: Int) : BasicSieve(size) {
 
         val nextNumberPosition = Position(currentPrimePosition)
 
-        val tasks = mutableListOf<Callable<Duration>>()
+        val tasks = mutableListOf<Callable<Unit>>()
 
         repeat(8) {
             val product = currentPrimePosition.value * nextNumberPosition.value
@@ -35,9 +34,6 @@ class ParallelSieve(size: Int) : BasicSieve(size) {
         }
 
         threadPool.invokeAll(tasks)
-        /*threadPool.invokeAll(tasks).forEach {
-            print("${it.get().inWholeMicroseconds} ")
-        }
-        println()*/
+
     }
 }

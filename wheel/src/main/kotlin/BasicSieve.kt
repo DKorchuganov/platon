@@ -11,8 +11,11 @@ open class BasicSieve(private val size: Int) : Sieve {
         0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 2, 0, 3, 0, 0, 0, 4, 0, 5, 0, 0, 0, 6, 0, 0, 0, 0, 0, 7
     )
     protected val maxFind = sqrt(size.toDouble() * 30)
-    protected val currentPrimePosition = Position(0, 1)
-    protected var hasComposites = true
+    protected val currentPrimePosition = Position(0, 0)
+
+    final override var hasComposites = true
+        protected set
+
     private val timeSource = TimeSource.Monotonic
     protected val start = timeSource.markNow()
 
@@ -84,7 +87,6 @@ open class BasicSieve(private val size: Int) : Sieve {
 
     override fun removeComposite() {
 
-        if (! hasComposites) return
         if (currentPrimePosition.value > maxFind) {
             hasComposites = false
             removeCompositeDuration = start.elapsedNow()
@@ -102,19 +104,15 @@ open class BasicSieve(private val size: Int) : Sieve {
             productColumn = columnByRemainder[(product % 30).toInt()]
 
             removeCompositeColumn(productRow, sieve[productColumn])
-            //print("${removeCompositeColumn(productRow, sieve[productColumn]).inWholeMicroseconds} ")
             nextNumberPosition.next()
         }
-        //println()
     }
 
 
-    protected fun removeCompositeColumn(productRow: Int, productColumnArray: BooleanArray): Duration {
-        val startFun = timeSource.markNow()
+    protected fun removeCompositeColumn(productRow: Int, productColumnArray: BooleanArray) {
         for (row in productRow .. productColumnArray.lastIndex step currentPrimePosition.value.toInt()) {
             productColumnArray[row] = false
         }
-        return startFun.elapsedNow()
     }
 
 }

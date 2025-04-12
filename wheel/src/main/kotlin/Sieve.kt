@@ -8,4 +8,5 @@ interface Sieve {
     fun nextPrime(): Boolean
     fun removeComposite()
     val removeCompositeDuration: Duration
+    val hasComposites: Boolean
 }

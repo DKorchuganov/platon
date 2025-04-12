@@ -51,12 +51,14 @@ fun main(args: Array<String>) {
         else
             BasicSieve(size)
 
-    var nextPrime = true
-
-    while (nextPrime) {
+    while (sieve.hasComposites) {
+        sieve.nextPrime()
         if (!silent) println(sieve.currentPrime)
         sieve.removeComposite()
-        nextPrime = sieve.nextPrime()
+    }
+
+    while (sieve.nextPrime()) {
+        if (!silent) println(sieve.currentPrime)
     }
 
     println("\n${sieve.count} prime numbers are found\n")
