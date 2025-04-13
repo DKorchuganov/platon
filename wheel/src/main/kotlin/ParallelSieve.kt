@@ -2,7 +2,6 @@ package com.jvmlab.platon.wheel
 
 import java.util.concurrent.Callable
 import java.util.concurrent.Executors
-import kotlin.time.Duration
 
 class ParallelSieve(size: Int) : BasicSieve(size) {
 
@@ -11,7 +10,6 @@ class ParallelSieve(size: Int) : BasicSieve(size) {
     override fun removeComposite() {
 
         if (currentPrimePosition.value > maxFind) {
-            removeCompositeDuration = start.elapsedNow()
             threadPool.shutdown()
             hasComposites = false
             return

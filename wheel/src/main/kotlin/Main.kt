@@ -2,6 +2,7 @@ package com.jvmlab.platon.wheel
 
 import com.jvmlab.platon.cli.BooleanOption
 import com.jvmlab.platon.cli.Parser
+import kotlin.time.TimeSource
 
 fun main(args: Array<String>) {
 
@@ -51,16 +52,25 @@ fun main(args: Array<String>) {
         else
             BasicSieve(size)
 
+    val timeSource = TimeSource.Monotonic
+    val removeCompositesStart = timeSource.markNow()
+
+
     while (sieve.hasComposites) {
         sieve.nextPrime()
         if (!silent) println(sieve.currentPrime)
         sieve.removeComposite()
     }
 
+    println("${removeCompositesStart.elapsedNow().inWholeMilliseconds} ms to remove composite numbers")
+
+    val findRemainingPrimesStart = timeSource.markNow()
+
     while (sieve.nextPrime()) {
         if (!silent) println(sieve.currentPrime)
     }
 
+    println("${findRemainingPrimesStart.elapsedNow().inWholeMilliseconds} ms to find remaining prime numbers")
     println("\n${sieve.count} prime numbers are found\n")
-    println("${sieve.removeCompositeDuration.inWholeMilliseconds} ms to remove composite numbers")
+
 }
