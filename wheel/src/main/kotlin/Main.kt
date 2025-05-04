@@ -11,7 +11,8 @@ fun main(args: Array<String>) {
             args, listOf(
                 BooleanOption('h',"help", "print this help"),
                 BooleanOption('s',"silent", "silent mode: don't print prime numbers"),
-                BooleanOption('P', "parallel", "perform calculations in parallel")
+                BooleanOption('P', "parallel", "perform calculations in parallel"),
+                BooleanOption('B', "binary", "use binary sieve")
             )
         )
     } catch (exception: IllegalArgumentException) {
@@ -47,7 +48,9 @@ fun main(args: Array<String>) {
 
     val silent = parser.getBooleanOption('s')
     val sieve: Sieve =
-        if (parser.getBooleanOption('P'))
+        if (parser.getBooleanOption('B'))
+            BinarySieve(size)
+        else if (parser.getBooleanOption('P'))
             ParallelSieve(size)
         else
             BasicSieve(size)

@@ -1,30 +1,58 @@
 package com.jvmlab.platon.wheel
 
+import kotlin.collections.lastIndex
 import kotlin.math.sqrt
 
-open class BasicSieve(private val size: Int) : Sieve {
-    protected val sieve = Array(8) { BooleanArray(size) { true } }
-    protected val columnByRemainder = intArrayOf(
+@OptIn(ExperimentalUnsignedTypes::class)
+class BinarySieve(private val size: Int) : Sieve {
+    private val sieve = UByteArray(size) {255.toUByte()}
+
+    private val columnByRemainder = intArrayOf(
         0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 2, 0, 3, 0, 0, 0, 4, 0, 5, 0, 0, 0, 6, 0, 0, 0, 0, 0, 7
     )
-    protected val maxFind = sqrt(size.toDouble() * 30)
-    protected val currentPrimePosition = Position(0, 0)
 
-    final override var hasComposites = true
-        protected set
+    private val maxFind = sqrt(size.toDouble() * 30)
+    private val currentPrimePosition = Position(0, 0)
 
-    final override var count = 4
+    override var hasComposites = true
+        private set
+
+    override var count = 4
         private set
 
     override val currentPrime
         get() = currentPrimePosition.value
 
     init {
-        sieve[0][0] = false
+        currentPrimePosition.erase()
     }
 
-    protected inner class Position(row: Int, column: Int) {
+
+    @OptIn(ExperimentalUnsignedTypes::class)
+    private inner class Position(row: Int, column: Int) {
         private val remainderByColumn = longArrayOf(1, 7, 11, 13, 17, 19, 23, 29)
+
+        private val checker = ubyteArrayOf(
+            1.toUByte(),
+            2.toUByte(),
+            4.toUByte(),
+            8.toUByte(),
+            16.toUByte(),
+            32.toUByte(),
+            64.toUByte(),
+            128.toUByte()
+        )
+
+        private val eraser = ubyteArrayOf(
+            254.toUByte(),
+            253.toUByte(),
+            251.toUByte(),
+            247.toUByte(),
+            239.toUByte(),
+            223.toUByte(),
+            191.toUByte(),
+            127.toUByte()
+        )
 
         var row = row
             private set
@@ -39,9 +67,13 @@ open class BasicSieve(private val size: Int) : Sieve {
             private set
 
         val isPrime
-            get() = sieve[column][row]
+            get() = (sieve[row].and(checker[column]) > 0.toUByte())
 
         constructor(position: Position) : this(position.row, position.column)
+
+        fun erase() {
+            sieve[row] = sieve[row].and(eraser[column])
+        }
 
         fun next() {
             if (column < 7) {
@@ -100,9 +132,8 @@ open class BasicSieve(private val size: Int) : Sieve {
 
 
     protected fun removeCompositeColumn(productRow: Int, productColumn: Int ) {
-        val productColumnArray = sieve[productColumn]
-        for (row in productRow .. productColumnArray.lastIndex step currentPrimePosition.value.toInt()) {
-            productColumnArray[row] = false
+        for (row in productRow .. sieve.lastIndex step currentPrimePosition.value.toInt()) {
+            Position(row, productColumn).erase()
         }
     }
 

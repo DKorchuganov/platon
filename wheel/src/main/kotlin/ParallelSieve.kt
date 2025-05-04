@@ -25,7 +25,7 @@ class ParallelSieve(size: Int) : BasicSieve(size) {
             val productColumn = columnByRemainder[(product % 30).toInt()]
 
             tasks.add {
-                removeCompositeColumn(productRow, sieve[productColumn])
+                removeCompositeColumn(productRow, productColumn)
             }
 
             nextNumberPosition.next()
