@@ -10,8 +10,8 @@ class BinarySieve(private val size: Int) : Sieve {
     private val columnByRemainder = intArrayOf(
         0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 2, 0, 3, 0, 0, 0, 4, 0, 5, 0, 0, 0, 6, 0, 0, 0, 0, 0, 7
     )
-
-    private val maxFind = sqrt(size.toDouble() * 30)
+    private val fullSize = size.toLong() * 30L
+    private val maxFind = sqrt(fullSize.toDouble())
     private val currentPrimePosition = Position(0, 0)
 
     override var hasComposites = true
@@ -90,6 +90,15 @@ class BinarySieve(private val size: Int) : Sieve {
         }
 
         private fun toNumber(): Long = row.toLong() * 30 + remainderByColumn[column]
+
+        fun nextRow(step: Int): Boolean {
+            val newRow = row + step
+            if (newRow <= sieve.lastIndex) {
+                row = newRow
+                return true
+            }
+            return false
+        }
     }
 
 
@@ -122,18 +131,22 @@ class BinarySieve(private val size: Int) : Sieve {
 
         repeat(8) {
             product = currentPrimePosition.value * nextNumberPosition.value
-            productRow = (product / 30).toInt()
-            productColumn = columnByRemainder[(product % 30).toInt()]
-
-            removeCompositeColumn(productRow, productColumn)
+            if (product <= fullSize) {
+                productRow = (product / 30).toInt()
+                productColumn = columnByRemainder[(product % 30).toInt()]
+                removeCompositeColumn(productRow, productColumn)
+            }
             nextNumberPosition.next()
         }
     }
 
 
-    protected fun removeCompositeColumn(productRow: Int, productColumn: Int ) {
-        for (row in productRow .. sieve.lastIndex step currentPrimePosition.value.toInt()) {
-            Position(row, productColumn).erase()
+    private fun removeCompositeColumn(productRow: Int, productColumn: Int ) {
+        val step = currentPrimePosition.value.toInt()
+        val position = Position(productRow,productColumn)
+        position.erase()
+        while (position.nextRow(step)) {
+            position.erase()
         }
     }
 
