@@ -7,7 +7,8 @@ open class BasicSieve(private val size: Int) : Sieve {
     protected val columnByRemainder = intArrayOf(
         0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 2, 0, 3, 0, 0, 0, 4, 0, 5, 0, 0, 0, 6, 0, 0, 0, 0, 0, 7
     )
-    protected val maxFind = sqrt(size.toDouble() * 30)
+    private val fullSize = size.toLong() * 30L
+    protected val maxFind = sqrt(fullSize.toDouble())
     protected val currentPrimePosition = Position(0, 0)
 
     final override var hasComposites = true
@@ -20,7 +21,7 @@ open class BasicSieve(private val size: Int) : Sieve {
         get() = currentPrimePosition.value
 
     init {
-        sieve[0][0] = false
+        currentPrimePosition.erase()
     }
 
     protected inner class Position(row: Int, column: Int) {
@@ -43,6 +44,10 @@ open class BasicSieve(private val size: Int) : Sieve {
 
         constructor(position: Position) : this(position.row, position.column)
 
+        fun erase() {
+            sieve[column][row] = false
+        }
+
         fun next() {
             if (column < 7) {
                 column++
@@ -58,6 +63,15 @@ open class BasicSieve(private val size: Int) : Sieve {
         }
 
         private fun toNumber(): Long = row.toLong() * 30 + remainderByColumn[column]
+
+        fun nextRow(step: Int): Boolean {
+            val newRow = row + step
+            if (newRow <= size - 1) {
+                row = newRow
+                return true
+            }
+            return false
+        }
     }
 
 
@@ -90,19 +104,22 @@ open class BasicSieve(private val size: Int) : Sieve {
 
         repeat(8) {
             product = currentPrimePosition.value * nextNumberPosition.value
-            productRow = (product / 30).toInt()
-            productColumn = columnByRemainder[(product % 30).toInt()]
-
-            removeCompositeColumn(productRow, productColumn)
+            if (product <= fullSize) {
+                productRow = (product / 30).toInt()
+                productColumn = columnByRemainder[(product % 30).toInt()]
+                removeCompositeColumn(productRow, productColumn)
+            }
             nextNumberPosition.next()
         }
     }
 
 
     protected fun removeCompositeColumn(productRow: Int, productColumn: Int ) {
-        val productColumnArray = sieve[productColumn]
-        for (row in productRow .. productColumnArray.lastIndex step currentPrimePosition.value.toInt()) {
-            productColumnArray[row] = false
+        val step = currentPrimePosition.value.toInt()
+        val position = Position(productRow,productColumn)
+        position.erase()
+        while (position.nextRow(step)) {
+            position.erase()
         }
     }
 
