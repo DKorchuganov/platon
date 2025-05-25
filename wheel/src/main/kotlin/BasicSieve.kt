@@ -27,11 +27,8 @@ open class BasicSieve(private val size: Int) : Sieve {
     protected inner class Position(row: Int, column: Int) {
         private val remainderByColumn = longArrayOf(1, 7, 11, 13, 17, 19, 23, 29)
 
-        var row = row
-            private set
-
-        var column = column
-            private set
+        private var row = row
+        private var column = column
 
         var value: Long = toNumber()
             private set

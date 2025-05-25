@@ -12,7 +12,7 @@ class BinarySieve(private val size: Int) : Sieve {
     )
     private val fullSize = size.toLong() * 30L
     private val maxFind = sqrt(fullSize.toDouble())
-    private val currentPrimePosition = Position(0, 0)
+    private val currentPrimePosition = BinaryPosition(0, 0, sieve)
 
     override var hasComposites = true
         private set
@@ -25,80 +25,6 @@ class BinarySieve(private val size: Int) : Sieve {
 
     init {
         currentPrimePosition.erase()
-    }
-
-
-    @OptIn(ExperimentalUnsignedTypes::class)
-    private inner class Position(row: Int, column: Int) {
-        private val remainderByColumn = longArrayOf(1, 7, 11, 13, 17, 19, 23, 29)
-
-        private val checker = ubyteArrayOf(
-            1.toUByte(),
-            2.toUByte(),
-            4.toUByte(),
-            8.toUByte(),
-            16.toUByte(),
-            32.toUByte(),
-            64.toUByte(),
-            128.toUByte()
-        )
-
-        private val eraser = ubyteArrayOf(
-            254.toUByte(),
-            253.toUByte(),
-            251.toUByte(),
-            247.toUByte(),
-            239.toUByte(),
-            223.toUByte(),
-            191.toUByte(),
-            127.toUByte()
-        )
-
-        var row = row
-            private set
-
-        var column = column
-            private set
-
-        var value: Long = toNumber()
-            private set
-
-        var last = false
-            private set
-
-        val isPrime
-            get() = (sieve[row].and(checker[column]) > 0.toUByte())
-
-        constructor(position: Position) : this(position.row, position.column)
-
-        fun erase() {
-            sieve[row] = sieve[row].and(eraser[column])
-        }
-
-        fun next() {
-            if (column < 7) {
-                column++
-            } else {
-                if (row == size - 1) {
-                    last = true
-                    return
-                }
-                column = 0
-                row++
-            }
-            value = toNumber()
-        }
-
-        private fun toNumber(): Long = row.toLong() * 30 + remainderByColumn[column]
-
-        fun nextRow(step: Int): Boolean {
-            val newRow = row + step
-            if (newRow <= sieve.lastIndex) {
-                row = newRow
-                return true
-            }
-            return false
-        }
     }
 
 
@@ -124,7 +50,7 @@ class BinarySieve(private val size: Int) : Sieve {
             return
         }
 
-        val nextNumberPosition = Position(currentPrimePosition)
+        val nextNumberPosition = BinaryPosition(currentPrimePosition)
         var product: Long
         var productRow: Int
         var productColumn: Int
@@ -143,7 +69,7 @@ class BinarySieve(private val size: Int) : Sieve {
 
     private fun removeCompositeColumn(productRow: Int, productColumn: Int ) {
         val step = currentPrimePosition.value.toInt()
-        val position = Position(productRow,productColumn)
+        val position = BinaryPosition(productRow, productColumn, sieve)
         position.erase()
         while (position.nextRow(step)) {
             position.erase()
