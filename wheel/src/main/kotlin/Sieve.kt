@@ -2,9 +2,9 @@ package com.jvmlab.platon.wheel
 
 
 interface Sieve {
-    val count: Int
-    val currentPrime: Long
-    fun nextPrime(): Boolean
-    fun removeComposite()
-    val hasComposites: Boolean
+    val count: Int             // how many prime numbers has been found in Sieve
+    val currentPrime: Long     // current prime number
+    fun nextPrime(): Boolean   // finds a next prime number after the currentPrime and sets the new currentPrime
+    fun removeComposite()      // removes composite numbers that are divisible by the currentPrime
+    val hasComposites: Boolean // true if Sieve still has composite numbers
 }
