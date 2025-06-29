@@ -15,7 +15,7 @@ class ParallelSieve(size: Int) : BasicSieve(size) {
             return
         }
 
-        val nextNumberPosition = Position(currentPrimePosition)
+        val nextNumberPosition = currentPrimePosition.copy()
 
         val tasks = mutableListOf<Callable<Unit>>()
 
