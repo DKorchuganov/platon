@@ -51,9 +51,9 @@ fun main(args: Array<String>) {
         if (parser.getBooleanOption('B'))
             BinarySieve(size)
         else if (parser.getBooleanOption('P'))
-            ParallelSieve(size)
+            ParallelBooleanSieve(size)
         else
-            BasicSieve(size)
+            BooleanSieve(size)
 
     val timeSource = TimeSource.Monotonic
     val removeCompositesStart = timeSource.markNow()

@@ -1,7 +1,7 @@
 package com.jvmlab.platon.wheel
 
 
-open class BasicSieve(size: Int) : AbstractSieve<Array<BooleanArray>>(size) {
+open class BooleanSieve(size: Int) : AbstractSieve<Array<BooleanArray>>(size) {
     override val sieve = Array(8) { BooleanArray(size) { true } }
     override val currentPrimePosition = createPosition(0, 0)
 

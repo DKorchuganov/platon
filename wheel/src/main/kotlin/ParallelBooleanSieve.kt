@@ -3,7 +3,7 @@ package com.jvmlab.platon.wheel
 import java.util.concurrent.Callable
 import java.util.concurrent.Executors
 
-class ParallelSieve(size: Int) : BasicSieve(size) {
+class ParallelBooleanSieve(size: Int) : BooleanSieve(size) {
 
     private val threadPool = Executors.newFixedThreadPool(8)
 
