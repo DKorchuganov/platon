@@ -48,8 +48,11 @@ fun main(args: Array<String>) {
 
     val silent = parser.getBooleanOption('s')
     val sieve: Sieve =
-        if (parser.getBooleanOption('B'))
+        if (parser.getBooleanOption('B')) {
+            if (parser.getBooleanOption('P'))
+                ParallelBinarySieve(size)
             BinarySieve(size)
+        }
         else if (parser.getBooleanOption('P'))
             ParallelBooleanSieve(size)
         else

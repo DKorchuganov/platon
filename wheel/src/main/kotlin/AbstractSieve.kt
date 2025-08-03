@@ -61,7 +61,7 @@ abstract class AbstractSieve<T>(size: Int) : Sieve {
     }
 
 
-    protected fun removeCompositeColumn(productRow: Int, productColumn: Int ) {
+    protected fun removeCompositeColumn(productRow: Int, productColumn: Int) {
         val step = currentPrimePosition.value.toInt()
         val position = createPosition(productRow, productColumn)
         position.erase()
