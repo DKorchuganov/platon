@@ -1,5 +1,6 @@
 package com.jvmlab.platon.wheel
 
+import com.jvmlab.platon.cli.ColumnEraser
 import kotlin.math.sqrt
 
 abstract class AbstractSieve<T>(size: Int) : Sieve {
@@ -21,6 +22,8 @@ abstract class AbstractSieve<T>(size: Int) : Sieve {
         get() = currentPrimePosition.value
 
     abstract fun createPosition(row: Int, column: Int): Position<T>
+
+    abstract fun createColumnEraser(row: Int, step: Int): ColumnEraser
 
     override fun nextPrime(): Boolean {
         currentPrimePosition.next()

@@ -1,5 +1,8 @@
 package com.jvmlab.platon.wheel
 
+import com.jvmlab.platon.cli.BinaryEraser
+import com.jvmlab.platon.cli.ColumnEraser
+
 
 @OptIn(ExperimentalUnsignedTypes::class)
 open class BinarySieve(size: Int) : AbstractSieve<UByteArray>(size) {
@@ -12,4 +15,8 @@ open class BinarySieve(size: Int) : AbstractSieve<UByteArray>(size) {
 
     override fun createPosition(row: Int, column: Int): Position<UByteArray> =
         BinaryPosition(row, column, sieve)
+
+    override fun createColumnEraser(row: Int, step: Int): ColumnEraser =
+        BinaryEraser(row, step, sieve)
+
 }
