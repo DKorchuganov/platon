@@ -1,11 +1,8 @@
 package com.jvmlab.platon.wheel
 
-import com.jvmlab.platon.cli.BinaryEraser
-import com.jvmlab.platon.cli.ColumnEraser
-
 
 @OptIn(ExperimentalUnsignedTypes::class)
-open class BinarySieve(size: Int) : AbstractSieve<UByteArray>(size) {
+open class BinarySieve(size: Int, newEraser: Boolean) : AbstractSieve<UByteArray>(size, newEraser) {
     override val sieve = UByteArray(size) {255.toUByte()}
     override val currentPrimePosition = createPosition(0, 0)
 

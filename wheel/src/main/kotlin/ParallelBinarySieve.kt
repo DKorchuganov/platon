@@ -3,12 +3,12 @@ package com.jvmlab.platon.wheel
 import java.util.concurrent.Callable
 import java.util.concurrent.Executors
 
-class ParallelBinarySieve(size: Int) : BinarySieve(size) {
+class ParallelBinarySieve(size: Int, newEraser: Boolean) : BinarySieve(size, newEraser) {
 
     private val threadPool = Executors.newFixedThreadPool(8)
 
     @OptIn(ExperimentalUnsignedTypes::class)
-    override fun removeComposite() {
+    override fun removeCompositeOld() {
 
         if (currentPrimePosition.value > maxFind) {
             threadPool.shutdown()

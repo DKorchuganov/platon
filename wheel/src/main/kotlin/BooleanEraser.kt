@@ -1,4 +1,4 @@
-package com.jvmlab.platon.cli
+package com.jvmlab.platon.wheel
 
 class BooleanEraser(
     private val row: Int,

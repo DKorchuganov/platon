@@ -1,9 +1,12 @@
 package com.jvmlab.platon.wheel
 
-import com.jvmlab.platon.cli.ColumnEraser
 import kotlin.math.sqrt
 
-abstract class AbstractSieve<T>(size: Int) : Sieve {
+abstract class AbstractSieve<T>(size: Int, newEraser: Boolean) : Sieve {
+    override val removeComposite =
+        if (newEraser) ::removeCompositeNew
+        else ::removeCompositeOld
+
     protected abstract val sieve: T
     protected val columnByRemainder = intArrayOf(
         0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 2, 0, 3, 0, 0, 0, 4, 0, 5, 0, 0, 0, 6, 0, 0, 0, 0, 0, 7
@@ -40,7 +43,14 @@ abstract class AbstractSieve<T>(size: Int) : Sieve {
     }
 
 
-    override fun removeComposite() {
+    fun removeCompositeNew() {
+        if (currentPrimePosition.value > maxFind) {
+            hasComposites = false
+            return
+        }
+    }
+
+     open fun removeCompositeOld() {
 
         if (currentPrimePosition.value > maxFind) {
             hasComposites = false

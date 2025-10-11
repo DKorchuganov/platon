@@ -1,4 +1,4 @@
-package com.jvmlab.platon.cli
+package com.jvmlab.platon.wheel
 
 @OptIn(ExperimentalUnsignedTypes::class)
 class BinaryEraser(

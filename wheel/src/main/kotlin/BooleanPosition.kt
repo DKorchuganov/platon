@@ -1,6 +1,7 @@
 package com.jvmlab.platon.wheel
 
 
+
 class BooleanPosition(row: Int, column: Int, sieve: Array<BooleanArray>) :
     Position<Array<BooleanArray>>(row, column, sieve) {
     override val size = sieve[0].size
@@ -15,3 +16,4 @@ class BooleanPosition(row: Int, column: Int, sieve: Array<BooleanArray>) :
     override fun copy(): Position<Array<BooleanArray>> = BooleanPosition(row, column, sieve)
 
 }
+

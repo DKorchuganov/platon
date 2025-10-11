@@ -12,7 +12,8 @@ fun main(args: Array<String>) {
                 BooleanOption('h',"help", "print this help"),
                 BooleanOption('s',"silent", "silent mode: don't print prime numbers"),
                 BooleanOption('P', "parallel", "perform calculations in parallel"),
-                BooleanOption('B', "binary", "use binary sieve")
+                BooleanOption('B', "binary", "use binary sieve"),
+                BooleanOption('E', description = "use new eraser")
             )
         )
     } catch (exception: IllegalArgumentException) {
@@ -50,13 +51,13 @@ fun main(args: Array<String>) {
     val sieve: Sieve =
         if (parser.getBooleanOption('B')) {
             if (parser.getBooleanOption('P'))
-                ParallelBinarySieve(size)
-            BinarySieve(size)
+                ParallelBinarySieve(size, parser.getBooleanOption('E'))
+            BinarySieve(size, parser.getBooleanOption('E'))
         }
         else if (parser.getBooleanOption('P'))
-            ParallelBooleanSieve(size)
+            ParallelBooleanSieve(size, parser.getBooleanOption('E'))
         else
-            BooleanSieve(size)
+            BooleanSieve(size, parser.getBooleanOption('E'))
 
     val timeSource = TimeSource.Monotonic
     val removeCompositesStart = timeSource.markNow()
@@ -80,3 +81,4 @@ fun main(args: Array<String>) {
     println("\n${sieve.count} prime numbers are found\n")
 
 }
+

@@ -3,11 +3,11 @@ package com.jvmlab.platon.wheel
 import java.util.concurrent.Callable
 import java.util.concurrent.Executors
 
-class ParallelBooleanSieve(size: Int) : BooleanSieve(size) {
+class ParallelBooleanSieve(size: Int, newEraser: Boolean) : BooleanSieve(size, newEraser) {
 
     private val threadPool = Executors.newFixedThreadPool(8)
 
-    override fun removeComposite() {
+    override fun removeCompositeOld() {
 
         if (currentPrimePosition.value > maxFind) {
             threadPool.shutdown()
@@ -35,3 +35,4 @@ class ParallelBooleanSieve(size: Int) : BooleanSieve(size) {
 
     }
 }
+
