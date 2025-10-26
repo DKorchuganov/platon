@@ -13,8 +13,8 @@ class BooleanEraser(
     }
 
     override fun erase() {
-        for (currentRow in row .. sieve[0].lastIndex step step) {
-            columns.forEach {
+        columns.forEach {
+            for (currentRow in row .. sieve[0].lastIndex step step) {
                 sieve[it][currentRow] = false
             }
         }
