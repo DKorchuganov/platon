@@ -2,7 +2,8 @@ package com.jvmlab.platon.wheel
 
 
 @OptIn(ExperimentalUnsignedTypes::class)
-open class BinarySieve(size: Int, newEraser: Boolean) : AbstractSieve<UByteArray>(size, newEraser) {
+open class BinarySieve(size: Int, newEraser: Boolean, parallel: Boolean) :
+    AbstractSieve<UByteArray>(size, newEraser, parallel) {
     override val sieve = UByteArray(size) {255.toUByte()}
     override val currentPrimePosition = createPosition(0, 0)
 

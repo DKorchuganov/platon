@@ -1,12 +1,18 @@
 package com.jvmlab.platon.wheel
 
+import java.util.concurrent.Callable
+import java.util.concurrent.Executors
 import kotlin.math.sqrt
 
-abstract class AbstractSieve<T>(size: Int, newEraser: Boolean) : Sieve {
+abstract class AbstractSieve<T>(size: Int, newEraser: Boolean, parallel: Boolean) : Sieve {
     override val removeComposite =
-        if (newEraser) ::removeCompositeNew
-        else ::removeCompositeOld
-
+        if (parallel) {
+            if (newEraser) ::removeCompositeNewParallel
+            else ::removeCompositeOldParallel
+        } else {
+            if (newEraser) ::removeCompositeNew
+            else ::removeCompositeOld
+        }
     protected abstract val sieve: T
     protected val columnByRemainder = intArrayOf(
         0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 2, 0, 3, 0, 0, 0, 4, 0, 5, 0, 0, 0, 6, 0, 0, 0, 0, 0, 7
@@ -99,6 +105,70 @@ abstract class AbstractSieve<T>(size: Int, newEraser: Boolean) : Sieve {
         while (position.nextRow(step)) {
             position.erase()
         }
+    }
+
+    private val threadPool = Executors.newFixedThreadPool(8)
+
+     fun removeCompositeOldParallel() {
+
+        if (currentPrimePosition.value > maxFind) {
+            threadPool.shutdown()
+            hasComposites = false
+            return
+        }
+
+        val nextNumberPosition = currentPrimePosition.copy()
+
+        val tasks = mutableListOf<Callable<Unit>>()
+
+        repeat(8) {
+            val product = currentPrimePosition.value * nextNumberPosition.value
+            val productRow = (product / 30).toInt()
+            val productColumn = columnByRemainder[(product % 30).toInt()]
+
+            tasks.add {
+                removeCompositeColumn(productRow, productColumn)
+            }
+
+            nextNumberPosition.next()
+        }
+
+        threadPool.invokeAll(tasks)
+
+    }
+
+     fun removeCompositeNewParallel() {
+        if (currentPrimePosition.value > maxFind) {
+            threadPool.shutdown()
+            hasComposites = false
+            return
+        }
+
+        val nextNumberPosition = currentPrimePosition.copy()
+
+        val erasers = mutableMapOf<Int, ColumnEraser>()
+        val tasks = mutableListOf<Callable<Unit>>()
+
+        repeat(8) {
+            val product = currentPrimePosition.value * nextNumberPosition.value
+            val productRow = (product / 30).toInt()
+            val productColumn = columnByRemainder[(product % 30).toInt()]
+            val remainder = (productRow % currentPrime).toInt()
+
+            erasers.getOrPut(remainder) {
+                createColumnEraser(productRow, currentPrime.toInt())
+            }.addColumn(productColumn)
+
+            nextNumberPosition.next()
+        }
+
+        erasers.forEach {
+            tasks.add {
+                it.value.erase()
+            }
+        }
+
+        threadPool.invokeAll(tasks)
     }
 
 }

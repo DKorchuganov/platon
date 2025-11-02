@@ -47,28 +47,20 @@ fun main(args: Array<String>) {
     }
     println("Start searching prime numbers above 5 and below ${size.toLong() * 30}")
 
+    val newEraser = parser.getBooleanOption('E')
+    val parallel = parser.getBooleanOption('P')
     val silent = parser.getBooleanOption('s')
     val sieve: Sieve =
-        if (parser.getBooleanOption('B')) {
-            if (parser.getBooleanOption('P'))
-                ParallelBinarySieve(size, parser.getBooleanOption('E')).also {
-                    println("Using ParallelBinarySieve")
-                }
-            else
-                BinarySieve(size, parser.getBooleanOption('E')).also {
+        if (parser.getBooleanOption('B'))
+            BinarySieve(size, newEraser, parallel).also {
                     println("Using BinarySieve")
-                }
-        }
-        else if (parser.getBooleanOption('P'))
-            ParallelBooleanSieve(size, parser.getBooleanOption('E')).also {
-                println("Using ParallelBooleanSieve")
             }
-
         else
-            BooleanSieve(size, parser.getBooleanOption('E')).also {
+            BooleanSieve(size, newEraser, parallel).also {
                 println("Using BooleanSieve")
             }
-
+    if (parallel) println("Using parallel mode")
+    if (newEraser) println("Using new eraser")
 
     val timeSource = TimeSource.Monotonic
     val removeCompositesStart = timeSource.markNow()
