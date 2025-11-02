@@ -43,7 +43,7 @@ abstract class AbstractSieve<T>(size: Int, newEraser: Boolean) : Sieve {
     }
 
 
-    fun removeCompositeNew() {
+    open fun removeCompositeNew() {
         if (currentPrimePosition.value > maxFind) {
             hasComposites = false
             return
@@ -55,17 +55,18 @@ abstract class AbstractSieve<T>(size: Int, newEraser: Boolean) : Sieve {
         var productColumn: Int
 
         repeat(8) {
-            product = currentPrimePosition.value * nextNumberPosition.value
+            product = currentPrime * nextNumberPosition.value
             if (product <= fullSize) {
                 productRow = (product / 30).toInt()
                 productColumn = columnByRemainder[(product % 30).toInt()]
-                val columnEraser = createColumnEraser(productRow, currentPrimePosition.value.toInt())
+                val columnEraser = createColumnEraser(productRow, currentPrime.toInt())
                 columnEraser.addColumn(productColumn)
                 columnEraser.erase()
             }
             nextNumberPosition.next()
         }
     }
+
 
      open fun removeCompositeOld() {
 
@@ -74,7 +75,7 @@ abstract class AbstractSieve<T>(size: Int, newEraser: Boolean) : Sieve {
             return
         }
 
-        val nextNumberPosition = currentPrimePosition.copy()
+         val nextNumberPosition = currentPrimePosition.copy()
         var product: Long
         var productRow: Int
         var productColumn: Int

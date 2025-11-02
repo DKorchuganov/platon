@@ -51,13 +51,24 @@ fun main(args: Array<String>) {
     val sieve: Sieve =
         if (parser.getBooleanOption('B')) {
             if (parser.getBooleanOption('P'))
-                ParallelBinarySieve(size, parser.getBooleanOption('E'))
-            BinarySieve(size, parser.getBooleanOption('E'))
+                ParallelBinarySieve(size, parser.getBooleanOption('E')).also {
+                    println("Using ParallelBinarySieve")
+                }
+            else
+                BinarySieve(size, parser.getBooleanOption('E')).also {
+                    println("Using BinarySieve")
+                }
         }
         else if (parser.getBooleanOption('P'))
-            ParallelBooleanSieve(size, parser.getBooleanOption('E'))
+            ParallelBooleanSieve(size, parser.getBooleanOption('E')).also {
+                println("Using ParallelBooleanSieve")
+            }
+
         else
-            BooleanSieve(size, parser.getBooleanOption('E'))
+            BooleanSieve(size, parser.getBooleanOption('E')).also {
+                println("Using BooleanSieve")
+            }
+
 
     val timeSource = TimeSource.Monotonic
     val removeCompositesStart = timeSource.markNow()
