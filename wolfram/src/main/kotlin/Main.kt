@@ -42,4 +42,6 @@ fun main(args: Array<String>) {
         return
     }
 
+    val rule = Rule(ruleCode.toUByte())
+    rule.show()
 }
