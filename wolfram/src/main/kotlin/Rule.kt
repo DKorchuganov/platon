@@ -22,4 +22,8 @@ class Rule(code: UByte) {
             println("${it.key} -> ${it.value}")
         }
     }
+
+
+    fun apply(triplet: Triplet): Cell = ruleMap[triplet]!!
+
 }
