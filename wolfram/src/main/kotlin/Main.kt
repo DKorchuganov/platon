@@ -44,4 +44,16 @@ fun main(args: Array<String>) {
 
     val rule = Rule(ruleCode.toUByte())
     rule.show()
+
+    val initialString = "--------------------------------**------------------*-*`----------------------------------*----------------------------"
+    val initialList = initialString.map {
+        if (it == '*') Cell(true) else Cell(false)
+    }
+    val row = Row(rule, initialList)
+
+    println(initialString)
+    repeat(100) {
+        val list = row.nextList()
+        println(list.joinToString(""))
+    }
 }
