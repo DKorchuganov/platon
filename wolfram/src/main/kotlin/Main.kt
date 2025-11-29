@@ -47,7 +47,7 @@ fun main(args: Array<String>) {
 
     val initialString = "--------------------------------**------------------*-*`----------------------------------*----------------------------"
     val initialList = initialString.map {
-        if (it == '*') Cell(true) else Cell(false)
+        if (it == '*') Cell.ALIVE else Cell.DEAD
     }
     val row = Row(rule, initialList)
 
