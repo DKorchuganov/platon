@@ -45,7 +45,13 @@ fun main(args: Array<String>) {
     val rule = Rule(ruleCode.toUByte())
     rule.show()
 
-    val initialString = "--------------------------------**------------------*-*`----------------------------------*----------------------------"
+    var initialString = if (parser.params.lastIndex > 0) parser.params[1] else ""
+
+    while (initialString.isEmpty()) {
+        println("Enter initial string:")
+        initialString = readln().trim()
+    }
+
     val initialList = initialString.map {
         if (it == '*') Cell.ALIVE else Cell.DEAD
     }
