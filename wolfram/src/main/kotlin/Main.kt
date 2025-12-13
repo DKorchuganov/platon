@@ -2,14 +2,19 @@ package com.jvmlab.platon.wolfram
 
 import com.jvmlab.platon.cli.BooleanOption
 import com.jvmlab.platon.cli.Parser
+import com.jvmlab.platon.cli.StringOption
 
 
 fun main(args: Array<String>) {
 
     val parser = try {
         Parser(
-            args, listOf(
+            args,
+            listOf(
                 BooleanOption('h',"help", "print this help")
+            ),
+            listOf(
+                StringOption('i', "initial-string", "set initial string")
             )
         )
     } catch (exception: IllegalArgumentException) {
@@ -45,7 +50,7 @@ fun main(args: Array<String>) {
     val rule = Rule(ruleCode.toUByte())
     rule.show()
 
-    var initialString = if (parser.params.lastIndex > 0) parser.params[1] else ""
+    var initialString = parser.getStringOption('i') ?: ""
 
     while (initialString.isEmpty()) {
         println("Enter initial string:")

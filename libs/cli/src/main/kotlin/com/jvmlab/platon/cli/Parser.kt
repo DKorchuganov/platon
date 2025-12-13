@@ -12,10 +12,11 @@ private enum class State {
 
 class Parser(
     args: Array<String>,
-    val booleanOptions: List<BooleanOption>,
-    val stringOptions: List<StringOption> = listOf()
+    booleanOptions: List<BooleanOption>,
+    stringOptions: List<StringOption> = listOf()
 ) {
 
+    private val allOptions = booleanOptions + stringOptions
     private val booleanOptionsByShortName = mutableMapOf<Char, BooleanOption>()
     private val booleanOptionsByLongName = mutableMapOf<String, BooleanOption>()
     private val booleanByOption = mutableMapOf<BooleanOption, Boolean>()
@@ -26,6 +27,9 @@ class Parser(
     private val mutableParams = mutableListOf<String>()
     val params
         get() = mutableParams.toList()
+
+    private var initialState = State.START
+    private var lastStringOption: StringOption? = null
 
     init {
         booleanOptions.forEach {
@@ -44,15 +48,10 @@ class Parser(
                 stringOptionsByLongName[it.longName] = it
             }
         }
-        args.forEach {
-            println(it)
-        }
 
         args.forEach(::parseArg)
     }
 
-    private var initialState = State.START
-    private var lastStringOption: StringOption? = null
 
     private fun parseArg(arg: String) {
 
@@ -128,7 +127,13 @@ class Parser(
         throw IllegalArgumentException("Undefined option: $longName")
     }
 
-    fun printOptions() = booleanOptions.forEach {
+    fun getStringOption(shortName: Char): String? {
+        val stringOption = stringOptionsByShortName[shortName]
+        if (stringOption != null) return stringByOption[stringOption]
+        throw IllegalArgumentException("Undefined option: $shortName")
+    }
+
+    fun printOptions() = allOptions.forEach {
         if (it.shortName != null) print("-${it.shortName}")
         if (it.shortName != null && it.longName != "") print(", ")
         if (it.longName != "") print("--${it.longName}")
