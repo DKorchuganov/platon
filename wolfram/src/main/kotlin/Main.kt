@@ -11,7 +11,8 @@ fun main(args: Array<String>) {
         Parser(
             args,
             listOf(
-                BooleanOption('h',"help", "print this help")
+                BooleanOption('h',"help", "print this help"),
+                BooleanOption('l', "loop", "treat row as a loop")
             ),
             listOf(
                 StringOption('i', "initial-string", "set initial string")
@@ -60,7 +61,9 @@ fun main(args: Array<String>) {
     val initialList = initialString.map {
         if (it == '*') Cell.ALIVE else Cell.DEAD
     }
-    val row = Row(rule, initialList)
+
+    val loop = parser.getBooleanOption('l')
+    val row = Row(rule, initialList, loop)
 
     println(initialString)
     repeat(100) {
