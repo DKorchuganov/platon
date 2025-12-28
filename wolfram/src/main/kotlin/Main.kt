@@ -12,7 +12,8 @@ fun main(args: Array<String>) {
             args,
             listOf(
                 BooleanOption('h',"help", "print this help"),
-                BooleanOption('l', "loop", "treat row as a loop")
+                BooleanOption('l', "loop", "treat row as a loop"),
+                BooleanOption('s', "stop", "stop at the end of the row")
             ),
             listOf(
                 StringOption('i', "initial-string", "set initial string")
@@ -66,8 +67,13 @@ fun main(args: Array<String>) {
     val row = Row(rule, initialList, loop)
 
     println(initialString)
-    repeat(100) {
-        val list = row.nextList()
+    val maxSteps = 100
+    var count = 0
+    val stop = parser.getBooleanOption('s')
+    var list = initialList
+    while ((count < maxSteps) && (stop && (list[0] == Cell.DEAD && list[list.lastIndex] == Cell.DEAD))) {
+        list = row.nextList()
         println(list.joinToString(""))
+        count++
     }
 }
