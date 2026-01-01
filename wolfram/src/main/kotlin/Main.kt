@@ -71,7 +71,10 @@ fun main(args: Array<String>) {
     var count = 0
     val stop = parser.getBooleanOption('s')
     var list = initialList
-    while ((count < maxSteps) && (stop && (list[0] == Cell.DEAD && list[list.lastIndex] == Cell.DEAD))) {
+    while (
+        (count < maxSteps) &&
+        (!stop || (list[0] == Cell.DEAD && list[list.lastIndex] == Cell.DEAD))
+    ) {
         list = row.nextList()
         println(list.joinToString(""))
         count++
