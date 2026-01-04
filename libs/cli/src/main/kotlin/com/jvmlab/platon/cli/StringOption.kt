@@ -1,6 +1,5 @@
 package com.jvmlab.platon.cli
 
-import com.jvmlab.platon.cli.BooleanOption
 
 class StringOption(shortName: Char?, longName: String, description: String) :
     AnyOption(shortName, longName, description) {
