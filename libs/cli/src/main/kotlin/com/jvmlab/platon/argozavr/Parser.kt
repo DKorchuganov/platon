@@ -120,6 +120,7 @@ class Parser {
                             lastOption = option
                         }
                     }
+                    index++
                 }
 
                 State.PARAMETER -> {
@@ -132,6 +133,7 @@ class Parser {
                     } ?: mutableParams.add(arg)
                     lastOption = null
                     initialState = State.START
+                    return
                 }
             }
         }

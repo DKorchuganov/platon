@@ -1,13 +1,13 @@
 package com.jvmlab.platon.wolfram
 
 import com.jvmlab.platon.cli.BooleanOption
-import com.jvmlab.platon.cli.Parser
+import com.jvmlab.platon.argozavr.Parser
 import com.jvmlab.platon.cli.StringOption
 
 
 fun main(args: Array<String>) {
 
-    val parser = try {
+    /*val parser = try {
         Parser(
             args,
             listOf(
@@ -27,7 +27,21 @@ fun main(args: Array<String>) {
     if (parser.getBooleanOption('h')) {
         parser.printOptions()
         return
-    }
+    } */
+
+    val parser = Parser()
+    val loopOption = parser.booleanOption('l', "loop", "treat row as a loop")
+    val stopOption = parser.booleanOption(
+        's',
+        "stop",
+        "stop at the end of the row"
+    )
+    val initialStringOption = parser.stringOption(
+        'i',
+        "initial-string",
+        "set initial string"
+    )
+    parser.parse(args)
 
     var input = if (parser.params.isNotEmpty()) parser.params[0] else ""
 
@@ -52,7 +66,7 @@ fun main(args: Array<String>) {
     val rule = Rule(ruleCode.toUByte())
     rule.show()
 
-    var initialString = parser.getStringOption('i') ?: ""
+    var initialString = initialStringOption.value ?: ""
 
     while (initialString.isEmpty()) {
         println("Enter initial string:")
@@ -63,13 +77,13 @@ fun main(args: Array<String>) {
         if (it == '*') Cell.ALIVE else Cell.DEAD
     }
 
-    val loop = parser.getBooleanOption('l')
+    val loop = loopOption.value
     val row = Row(rule, initialList, loop)
 
     println(initialString)
     val maxSteps = 100
     var count = 0
-    val stop = parser.getBooleanOption('s')
+    val stop = stopOption.value
     var list = initialList
     while (
         (count < maxSteps) &&

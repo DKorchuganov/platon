@@ -6,4 +6,5 @@ class StringOption(
     description: String
 ) : AnyOption<String?>(shortName, longName, description) {
     override var value: String? = null
+    internal set
 }
