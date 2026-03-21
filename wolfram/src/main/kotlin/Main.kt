@@ -41,6 +41,12 @@ fun main(args: Array<String>) {
         "initial-string",
         "set initial string"
     )
+    val stepsOption = parser.intOption(
+        'S',
+        "steps",
+        "set max number of steps",
+        100
+    )
     parser.parse(args)
 
     var input = if (parser.params.isNotEmpty()) parser.params[0] else ""
@@ -81,12 +87,11 @@ fun main(args: Array<String>) {
     val row = Row(rule, initialList, loop)
 
     println(initialString)
-    val maxSteps = 100
     var count = 0
     val stop = stopOption.value
     var list = initialList
     while (
-        (count < maxSteps) &&
+        (count < stepsOption.value) &&
         (!stop || (list[0] == Cell.DEAD && list[list.lastIndex] == Cell.DEAD))
     ) {
         list = row.nextList()
