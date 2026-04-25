@@ -1,8 +1,6 @@
 package com.jvmlab.platon.wolfram
 
-class Rule(code: UByte) {
-
-    private val ruleMap = mutableMapOf<Triplet, Cell>()
+class CodedRule(code: UByte) : AbstractRule() {
 
     init {
         val list = listOf(Cell.DEAD, Cell.ALIVE)
@@ -15,15 +13,4 @@ class Rule(code: UByte) {
                     currentCode = (currentCode / 2u).toUByte()
                 }
     }
-
-
-    fun show() {
-        ruleMap.forEach {
-            println("${it.key} -> ${it.value}")
-        }
-    }
-
-
-    fun apply(triplet: Triplet): Cell = ruleMap[triplet]!!
-
 }

@@ -1,6 +1,6 @@
 package com.jvmlab.platon.wolfram
 
-class Row(private val rule: Rule, initialList: List<Cell>, val loop: Boolean) {
+class Row(private val rule: AbstractRule, initialList: List<Cell>, val loop: Boolean) {
 
     private val list = initialList.toMutableList()
 

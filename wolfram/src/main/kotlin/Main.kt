@@ -1,8 +1,6 @@
 package com.jvmlab.platon.wolfram
 
-import com.jvmlab.platon.cli.BooleanOption
 import com.jvmlab.platon.argozavr.Parser
-import com.jvmlab.platon.cli.StringOption
 
 
 fun main(args: Array<String>) {
@@ -47,29 +45,38 @@ fun main(args: Array<String>) {
         "set max number of steps",
         100
     )
+    val manualOption = parser.booleanOption(
+        'm',
+        "manual",
+        "enter the rule manually"
+    )
     parser.parse(args)
 
-    var input = if (parser.params.isNotEmpty()) parser.params[0] else ""
+    val rule = if (manualOption.value) {
+        ManualRule()
+    } else {
+        var input = if (parser.params.isNotEmpty()) parser.params[0] else ""
 
-    while (!((input.isNotEmpty()) && (input.all { it.isDigit() }))) {
-        print("Enter number from 0 to 255: ")
-        input = readln().trim()
+        while (!((input.isNotEmpty()) && (input.all { it.isDigit() }))) {
+            print("Enter number from 0 to 255: ")
+            input = readln().trim()
 
-        if (input.length > 3) {
-            println()
-            println("Too many characters: ${input.length}")
-            input = ""
+            if (input.length > 3) {
+                println()
+                println("Too many characters: ${input.length}")
+                input = ""
+            }
         }
-    }
 
-    val ruleCode = input.toInt()
-    if (ruleCode > 255) {
-        println()
-        println("The number should be less than 256!!!")
-        return
-    }
+        val ruleCode = input.toInt()
+        if (ruleCode > 255) {
+            println()
+            println("The number should be less than 256!!!")
+            return
+        }
 
-    val rule = Rule(ruleCode.toUByte())
+        CodedRule(ruleCode.toUByte())
+    }
     rule.show()
 
     var initialString = initialStringOption.value ?: ""
