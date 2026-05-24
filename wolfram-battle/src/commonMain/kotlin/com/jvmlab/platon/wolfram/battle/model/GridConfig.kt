@@ -1,4 +1,4 @@
-package com.example.chipgrid.model
+package com.jvmlab.platon.wolfram.battle.model
 
 /*
  * All important business numbers for the board live here.

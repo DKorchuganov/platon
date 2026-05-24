@@ -6,7 +6,7 @@ Do them one by one.
 
 ## Exercise 1: change the chip limit
 
-Open [GridConfig.kt](../src/commonMain/kotlin/com/example/chipgrid/model/GridConfig.kt).
+Open [GridConfig.kt](../src/commonMain/kotlin/com/jvmlab/platon/wolfram/battle/model/GridConfig.kt).
 
 Change:
 
@@ -28,7 +28,7 @@ You should see a message that the side is full.
 
 ## Exercise 2: change the board size
 
-Open [GridConfig.kt](../src/commonMain/kotlin/com/example/chipgrid/model/GridConfig.kt).
+Open [GridConfig.kt](../src/commonMain/kotlin/com/jvmlab/platon/wolfram/battle/model/GridConfig.kt).
 
 Try:
 
@@ -57,7 +57,7 @@ Run the app again.
 
 ## Exercise 4: change grid line color
 
-Open [ChipGridCanvas.kt](../src/commonMain/kotlin/com/example/chipgrid/components/ChipGridCanvas.kt).
+Open [ChipGridCanvas.kt](../src/commonMain/kotlin/com/jvmlab/platon/wolfram/battle/components/ChipGridCanvas.kt).
 
 Find:
 
@@ -75,7 +75,7 @@ val thinLine = Color(0xFFE8E8E8)
 
 ## Exercise 5: add a new status line
 
-Open [App.kt](../src/commonMain/kotlin/com/example/chipgrid/App.kt).
+Open [App.kt](../src/commonMain/kotlin/com/jvmlab/platon/wolfram/battle/App.kt).
 
 Find `StatusPanel()`.
 

@@ -94,7 +94,7 @@ http://localhost:8080/
 The grid size and chip limit are in one file:
 
 ```text
-src/commonMain/kotlin/com/example/chipgrid/model/GridConfig.kt
+src/commonMain/kotlin/com/jvmlab/platon/wolfram/battle/model/GridConfig.kt
 ```
 
 Current defaults:
@@ -112,7 +112,7 @@ For a landscape board, `COLUMNS` is the horizontal size and `ROWS` is the vertic
 ## Project structure
 
 ```text
-src/commonMain/kotlin/com/example/chipgrid/
+src/commonMain/kotlin/com/jvmlab/platon/wolfram/battle/
 ├── App.kt
 ├── components/
 │   └── ChipGridCanvas.kt
@@ -122,7 +122,7 @@ src/commonMain/kotlin/com/example/chipgrid/
     └── GridConfig.kt
 
 src/wasmJsMain/
-├── kotlin/com/example/chipgrid/Main.kt
+├── kotlin/com/jvmlab/platon/wolfram/battle/Main.kt
 └── resources/
     ├── index.html
     └── styles.css

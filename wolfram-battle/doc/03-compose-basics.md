@@ -6,7 +6,7 @@ Compose is a way to describe UI with Kotlin functions.
 
 A function with `@Composable` can draw UI.
 
-Example from [App.kt](../src/commonMain/kotlin/com/example/chipgrid/App.kt):
+Example from [App.kt](../src/commonMain/kotlin/com/jvmlab/platon/wolfram/battle/App.kt):
 
 ```kotlin
 @Composable
@@ -65,7 +65,7 @@ This means:
 
 State is data that can change while the app is running.
 
-In [App.kt](../src/commonMain/kotlin/com/example/chipgrid/App.kt):
+In [App.kt](../src/commonMain/kotlin/com/jvmlab/platon/wolfram/battle/App.kt):
 
 ```kotlin
 var gridState by remember { mutableStateOf(ChipGridState()) }

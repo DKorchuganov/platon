@@ -6,11 +6,11 @@ It does not draw the screen.
 
 The model files are here:
 
-[model folder](../src/commonMain/kotlin/com/example/chipgrid/model)
+[model folder](../src/commonMain/kotlin/com/jvmlab/platon/wolfram/battle/model)
 
 ## GridConfig
 
-[GridConfig.kt](../src/commonMain/kotlin/com/example/chipgrid/model/GridConfig.kt) stores the important numbers:
+[GridConfig.kt](../src/commonMain/kotlin/com/jvmlab/platon/wolfram/battle/model/GridConfig.kt) stores the important numbers:
 
 ```kotlin
 object GridConfig {
@@ -24,7 +24,7 @@ If you want a different board size, this is the first file to check.
 
 ## CellPosition
 
-[CellPosition.kt](../src/commonMain/kotlin/com/example/chipgrid/model/CellPosition.kt) describes one grid cell:
+[CellPosition.kt](../src/commonMain/kotlin/com/jvmlab/platon/wolfram/battle/model/CellPosition.kt) describes one grid cell:
 
 ```kotlin
 data class CellPosition(
@@ -46,7 +46,7 @@ The UI messages show user-friendly numbers from 1.
 
 ## ChipSide
 
-[ChipGridState.kt](../src/commonMain/kotlin/com/example/chipgrid/model/ChipGridState.kt) contains this enum:
+[ChipGridState.kt](../src/commonMain/kotlin/com/jvmlab/platon/wolfram/battle/model/ChipGridState.kt) contains this enum:
 
 ```kotlin
 enum class ChipSide {

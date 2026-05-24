@@ -1,4 +1,4 @@
-package com.example.chipgrid.model
+package com.jvmlab.platon.wolfram.battle.model
 
 /*
  * There are only two chip sides in this app:

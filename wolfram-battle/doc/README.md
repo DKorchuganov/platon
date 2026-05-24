@@ -18,10 +18,10 @@ Read the files in this order:
 
 Important source files:
 
-- [App.kt](../src/commonMain/kotlin/com/example/chipgrid/App.kt)
-- [ChipGridCanvas.kt](../src/commonMain/kotlin/com/example/chipgrid/components/ChipGridCanvas.kt)
-- [ChipGridState.kt](../src/commonMain/kotlin/com/example/chipgrid/model/ChipGridState.kt)
-- [GridConfig.kt](../src/commonMain/kotlin/com/example/chipgrid/model/GridConfig.kt)
-- [Main.kt](../src/wasmJsMain/kotlin/com/example/chipgrid/Main.kt)
+- [App.kt](../src/commonMain/kotlin/com/jvmlab/platon/wolfram/battle/App.kt)
+- [ChipGridCanvas.kt](../src/commonMain/kotlin/com/jvmlab/platon/wolfram/battle/components/ChipGridCanvas.kt)
+- [ChipGridState.kt](../src/commonMain/kotlin/com/jvmlab/platon/wolfram/battle/model/ChipGridState.kt)
+- [GridConfig.kt](../src/commonMain/kotlin/com/jvmlab/platon/wolfram/battle/model/GridConfig.kt)
+- [Main.kt](../src/wasmJsMain/kotlin/com/jvmlab/platon/wolfram/battle/Main.kt)
 - [index.html](../src/wasmJsMain/resources/index.html)
 - [styles.css](../src/wasmJsMain/resources/styles.css)

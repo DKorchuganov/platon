@@ -1,6 +1,6 @@
 # 06. Canvas grid and clicks
 
-The grid is drawn in [ChipGridCanvas.kt](../src/commonMain/kotlin/com/example/chipgrid/components/ChipGridCanvas.kt).
+The grid is drawn in [ChipGridCanvas.kt](../src/commonMain/kotlin/com/jvmlab/platon/wolfram/battle/components/ChipGridCanvas.kt).
 
 ## Why Canvas?
 
@@ -22,7 +22,7 @@ Canvas lets us draw:
 
 ## Canvas size
 
-The canvas receives its size from [App.kt](../src/commonMain/kotlin/com/example/chipgrid/App.kt).
+The canvas receives its size from [App.kt](../src/commonMain/kotlin/com/jvmlab/platon/wolfram/battle/App.kt).
 
 Inside the canvas, we calculate cell size:
 
@@ -108,7 +108,7 @@ The canvas does not decide the business rule.
 
 It only says: “The user clicked this cell.”
 
-The rule lives in [App.kt](../src/commonMain/kotlin/com/example/chipgrid/App.kt) and [ChipGridState.kt](../src/commonMain/kotlin/com/example/chipgrid/model/ChipGridState.kt).
+The rule lives in [App.kt](../src/commonMain/kotlin/com/jvmlab/platon/wolfram/battle/App.kt) and [ChipGridState.kt](../src/commonMain/kotlin/com/jvmlab/platon/wolfram/battle/model/ChipGridState.kt).
 
 ## Good separation
 

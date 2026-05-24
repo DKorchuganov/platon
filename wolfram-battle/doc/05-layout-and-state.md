@@ -1,13 +1,13 @@
 # 05. Layout and state
 
-The main screen is in [App.kt](../src/commonMain/kotlin/com/example/chipgrid/App.kt).
+The main screen is in [App.kt](../src/commonMain/kotlin/com/jvmlab/platon/wolfram/battle/App.kt).
 
 ## Root composable
 
 The root composable is:
 
 ```kotlin
-fun ChipGridApp()
+fun WolframBattleApp()
 ```
 
 This is the main screen of the app.

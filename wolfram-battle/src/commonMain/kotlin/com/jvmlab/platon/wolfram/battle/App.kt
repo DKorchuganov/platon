@@ -1,4 +1,4 @@
-package com.example.chipgrid
+package com.jvmlab.platon.wolfram.battle
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -28,11 +28,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.chipgrid.components.ChipGridCanvas
-import com.example.chipgrid.model.CellPosition
-import com.example.chipgrid.model.ChipGridState
-import com.example.chipgrid.model.ChipSide
-import com.example.chipgrid.model.GridConfig
+import com.jvmlab.platon.wolfram.battle.components.ChipGridCanvas
+import com.jvmlab.platon.wolfram.battle.model.CellPosition
+import com.jvmlab.platon.wolfram.battle.model.ChipGridState
+import com.jvmlab.platon.wolfram.battle.model.ChipSide
+import com.jvmlab.platon.wolfram.battle.model.GridConfig
 
 /*
  * This file contains the main screen of the app.
@@ -41,7 +41,7 @@ import com.example.chipgrid.model.GridConfig
  * You can think about it like this:
  * - StatusPanel() describes the text panel and Clear button.
  * - FlexibleBoard() describes the grid area.
- * - ChipGridApp() puts all these pieces together.
+ * - WolframBattleApp() puts all these pieces together.
  */
 
 /*
@@ -52,7 +52,7 @@ import com.example.chipgrid.model.GridConfig
 private val BoardAspectRatio: Float = GridConfig.COLUMNS.toFloat() / GridConfig.ROWS.toFloat()
 
 @Composable
-fun ChipGridApp() {
+fun WolframBattleApp() {
     /*
      * remember { mutableStateOf(...) } stores values inside the Compose UI.
      * When we assign a new value to gridState or message, Compose redraws

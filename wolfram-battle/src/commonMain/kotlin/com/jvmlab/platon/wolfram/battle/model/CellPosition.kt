@@ -1,4 +1,4 @@
-package com.example.chipgrid.model
+package com.jvmlab.platon.wolfram.battle.model
 
 /*
  * A CellPosition is the logical place that the user clicked.

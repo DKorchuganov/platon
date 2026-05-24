@@ -47,7 +47,7 @@ The Kotlin/Wasm browser tooling may add a Node.js distribution repository intern
 ## Source structure
 
 ```text
-src/commonMain/kotlin/com/example/chipgrid/
+src/commonMain/kotlin/com/jvmlab/platon/wolfram/battle/
 ├── App.kt
 ├── components/
 │   └── ChipGridCanvas.kt
@@ -57,7 +57,7 @@ src/commonMain/kotlin/com/example/chipgrid/
     └── GridConfig.kt
 
 src/wasmJsMain/
-├── kotlin/com/example/chipgrid/Main.kt
+├── kotlin/com/jvmlab/platon/wolfram/battle/Main.kt
 └── resources/
     ├── index.html
     └── styles.css
@@ -93,7 +93,7 @@ Put browser-specific entry code and browser resources here.
 
 ## Compose rules for this project
 
-- `ChipGridApp()` is the root app composable.
+- `WolframBattleApp()` is the root app composable.
 - `FlexibleBoard()` controls board size.
 - `ChipGridCanvas()` draws the grid and chips.
 - `ChipGridState` owns the state rules.
@@ -108,7 +108,7 @@ When changing code, check whether a tutorial page links to that code. Update the
 Prefer relative Markdown links, for example:
 
 ```markdown
-[App.kt](../src/commonMain/kotlin/com/example/chipgrid/App.kt)
+[App.kt](../src/commonMain/kotlin/com/jvmlab/platon/wolfram/battle/App.kt)
 ```
 
 ## Style rules

@@ -1,4 +1,4 @@
-package com.example.chipgrid.components
+package com.jvmlab.platon.wolfram.battle.components
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.border
@@ -11,9 +11,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.dp
-import com.example.chipgrid.model.CellPosition
-import com.example.chipgrid.model.ChipGridState
-import com.example.chipgrid.model.GridConfig
+import com.jvmlab.platon.wolfram.battle.model.CellPosition
+import com.jvmlab.platon.wolfram.battle.model.ChipGridState
+import com.jvmlab.platon.wolfram.battle.model.GridConfig
 import kotlin.math.floor
 
 /*

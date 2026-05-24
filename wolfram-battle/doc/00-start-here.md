@@ -52,11 +52,11 @@ The board grows or shrinks when the browser window size changes.
 
 Start with these files:
 
-1. [GridConfig.kt](../src/commonMain/kotlin/com/example/chipgrid/model/GridConfig.kt) — board size and chip limit
-2. [ChipGridState.kt](../src/commonMain/kotlin/com/example/chipgrid/model/ChipGridState.kt) — board state and rules
-3. [App.kt](../src/commonMain/kotlin/com/example/chipgrid/App.kt) — screen layout
-4. [ChipGridCanvas.kt](../src/commonMain/kotlin/com/example/chipgrid/components/ChipGridCanvas.kt) — grid drawing and mouse clicks
-5. [Main.kt](../src/wasmJsMain/kotlin/com/example/chipgrid/Main.kt) — app start point
+1. [GridConfig.kt](../src/commonMain/kotlin/com/jvmlab/platon/wolfram/battle/model/GridConfig.kt) — board size and chip limit
+2. [ChipGridState.kt](../src/commonMain/kotlin/com/jvmlab/platon/wolfram/battle/model/ChipGridState.kt) — board state and rules
+3. [App.kt](../src/commonMain/kotlin/com/jvmlab/platon/wolfram/battle/App.kt) — screen layout
+4. [ChipGridCanvas.kt](../src/commonMain/kotlin/com/jvmlab/platon/wolfram/battle/components/ChipGridCanvas.kt) — grid drawing and mouse clicks
+5. [Main.kt](../src/wasmJsMain/kotlin/com/jvmlab/platon/wolfram/battle/Main.kt) — app start point
 
 ## Try it
 

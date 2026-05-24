@@ -1,4 +1,4 @@
-package com.example.chipgrid
+package com.jvmlab.platon.wolfram.battle
 
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.window.ComposeViewport
@@ -13,6 +13,6 @@ import androidx.compose.ui.window.ComposeViewport
 @OptIn(ExperimentalComposeUiApi::class)
 fun main() {
     ComposeViewport(viewportContainerId = "compose-root") {
-        ChipGridApp()
+        WolframBattleApp()
     }
 }

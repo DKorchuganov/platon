@@ -60,7 +60,7 @@ src/
 
 ### `commonMain`
 
-[commonMain](../src/commonMain/kotlin/com/example/chipgrid) contains normal Kotlin app code.
+[commonMain](../src/commonMain/kotlin/com/jvmlab/platon/wolfram/battle) contains normal Kotlin app code.
 
 In this project, it contains:
 
@@ -74,7 +74,7 @@ In this project, it contains:
 
 It contains:
 
-- [Main.kt](../src/wasmJsMain/kotlin/com/example/chipgrid/Main.kt)
+- [Main.kt](../src/wasmJsMain/kotlin/com/jvmlab/platon/wolfram/battle/Main.kt)
 - [index.html](../src/wasmJsMain/resources/index.html)
 - [styles.css](../src/wasmJsMain/resources/styles.css)
 
@@ -83,13 +83,13 @@ It contains:
 The main package is:
 
 ```text
-com.example.chipgrid
+com.jvmlab.platon.wolfram.battle
 ```
 
 The Kotlin code is split like this:
 
 ```text
-com/example/chipgrid/
+com/jvmlab/platon/wolfram/battle/
 ├── App.kt
 ├── components/
 │   └── ChipGridCanvas.kt
@@ -101,18 +101,18 @@ com/example/chipgrid/
 
 ### `model`
 
-The [model](../src/commonMain/kotlin/com/example/chipgrid/model) folder contains data and rules.
+The [model](../src/commonMain/kotlin/com/jvmlab/platon/wolfram/battle/model) folder contains data and rules.
 
 It does not draw UI.
 
 ### `components`
 
-The [components](../src/commonMain/kotlin/com/example/chipgrid/components) folder contains reusable UI parts.
+The [components](../src/commonMain/kotlin/com/jvmlab/platon/wolfram/battle/components) folder contains reusable UI parts.
 
 In this app, it has one component: the grid canvas.
 
 ### `App.kt`
 
-[App.kt](../src/commonMain/kotlin/com/example/chipgrid/App.kt) is the main screen.
+[App.kt](../src/commonMain/kotlin/com/jvmlab/platon/wolfram/battle/App.kt) is the main screen.
 
 It connects model and UI.
