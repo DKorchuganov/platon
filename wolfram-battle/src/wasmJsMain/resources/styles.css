@@ -1,0 +1,25 @@
+/*
+ * This is the only CSS file in the project.
+ * CSS means Cascading Style Sheets. It is normal web styling.
+ *
+ * The Kotlin Compose app draws almost everything by itself.
+ * This file only prepares the browser page for Compose.
+ */
+html, body, #compose-root {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    /* Compose has its own scroll area, so the browser body does not scroll. */
+    overflow: hidden;
+
+    /* The browser uses this font before Compose starts. */
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+canvas {
+    /* Remove the default browser focus outline around the canvas. */
+    outline: none;
+}
