@@ -44,18 +44,18 @@ That means:
 
 The UI messages show user-friendly numbers from 1.
 
-## ChipSide
+## Chip
 
 [ChipGridState.kt](../src/commonMain/kotlin/com/jvmlab/platon/wolfram/battle/model/ChipGridState.kt) contains this enum:
 
 ```kotlin
-enum class ChipSide {
-    BlackLeft,
-    WhiteRight,
+enum class Chip {
+    Left,
+    Right,
 }
 ```
 
-It says which side the user clicked.
+It says which playable column the user clicked.
 
 ## ChipGridState
 

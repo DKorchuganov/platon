@@ -1,13 +1,13 @@
 package com.jvmlab.platon.wolfram.battle.model
 
 /*
- * There are only two chip sides in this app:
- * - black chips in the left column
- * - white chips in the right column
+ * There are only two chip positions in this app:
+ * - chips in the left column
+ * - chips in the right column
  */
-enum class ChipSide {
-    BlackLeft,
-    WhiteRight,
+enum class Chip {
+    Left,
+    Right,
 }
 
 /*
@@ -35,14 +35,14 @@ data class ChipGridState(
     val blackCount: Int get() = blackChipRows.size
     val whiteCount: Int get() = whiteChipRows.size
 
-    fun toggle(side: ChipSide, row: Int): ToggleResult {
+    fun toggle(chip: Chip, row: Int): ToggleResult {
         require(row in 0 until GridConfig.ROWS) {
             "Row must be between 0 and ${GridConfig.ROWS - 1}, but was $row"
         }
 
-        return when (side) {
-            ChipSide.BlackLeft -> toggleBlack(row)
-            ChipSide.WhiteRight -> toggleWhite(row)
+        return when (chip) {
+            Chip.Left -> toggleBlack(row)
+            Chip.Right -> toggleWhite(row)
         }
     }
 

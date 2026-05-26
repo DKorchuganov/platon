@@ -125,13 +125,21 @@ private fun androidx.compose.ui.graphics.drawscope.DrawScope.drawChips(
     val radius = minOf(cellWidth, cellHeight) * 0.42f
     val leftColumnCenterX = cellWidth / 2f
     val rightColumnCenterX = canvasSize.width - cellWidth / 2f
+    val leftChipOutlineColor = GridConfig.LEFT_CHIP_OUTLINE_COLOR ?: GridConfig.LEFT_CHIP_COLOR
+    val rightChipOutlineColor = GridConfig.RIGHT_CHIP_OUTLINE_COLOR ?: GridConfig.RIGHT_CHIP_COLOR
 
     state.blackChipRows.forEach { row ->
         val center = Offset(
             x = leftColumnCenterX,
             y = (row + 0.5f) * cellHeight,
         )
-        drawCircle(color = Color.Black, radius = radius, center = center)
+        drawCircle(color = GridConfig.LEFT_CHIP_COLOR, radius = radius, center = center)
+        drawCircle(
+            color = leftChipOutlineColor,
+            radius = radius,
+            center = center,
+            style = Stroke(width = 1.5f),
+        )
     }
 
     state.whiteChipRows.forEach { row ->
@@ -139,9 +147,9 @@ private fun androidx.compose.ui.graphics.drawscope.DrawScope.drawChips(
             x = rightColumnCenterX,
             y = (row + 0.5f) * cellHeight,
         )
-        drawCircle(color = Color.White, radius = radius, center = center)
+        drawCircle(color = GridConfig.RIGHT_CHIP_COLOR, radius = radius, center = center)
         drawCircle(
-            color = Color.Black,
+            color = rightChipOutlineColor,
             radius = radius,
             center = center,
             style = Stroke(width = 1.5f),

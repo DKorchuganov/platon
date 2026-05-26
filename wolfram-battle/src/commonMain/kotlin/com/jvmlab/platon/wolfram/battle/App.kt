@@ -31,7 +31,7 @@ import androidx.compose.ui.unit.sp
 import com.jvmlab.platon.wolfram.battle.components.ChipGridCanvas
 import com.jvmlab.platon.wolfram.battle.model.CellPosition
 import com.jvmlab.platon.wolfram.battle.model.ChipGridState
-import com.jvmlab.platon.wolfram.battle.model.ChipSide
+import com.jvmlab.platon.wolfram.battle.model.Chip
 import com.jvmlab.platon.wolfram.battle.model.GridConfig
 
 /*
@@ -182,8 +182,8 @@ private fun handleCellClick(
      * In messages for the user, rows and columns start from 1.
      */
     val toggleResult = when (position.column) {
-        0 -> currentState.toggle(ChipSide.BlackLeft, position.row)
-        GridConfig.COLUMNS - 1 -> currentState.toggle(ChipSide.WhiteRight, position.row)
+        0 -> currentState.toggle(Chip.Left, position.row)
+        GridConfig.COLUMNS - 1 -> currentState.toggle(Chip.Right, position.row)
         else -> return ClickResult(
             state = currentState,
             message = "Column ${position.column + 1} is not playable. Use column 1 for black chips or column ${GridConfig.COLUMNS} for white chips.",

@@ -1,7 +1,9 @@
 package com.jvmlab.platon.wolfram.battle.model
 
+import androidx.compose.ui.graphics.Color
+
 /*
- * All important business numbers for the board live here.
+ * All important board configuration values live here.
  * This makes the project easier to change later.
  */
 object GridConfig {
@@ -13,4 +15,16 @@ object GridConfig {
 
     /** Each side may contain at most 10 chips. */
     const val MAX_CHIPS_PER_SIDE: Int = 10
+
+    /** Fill color for chips in the left column. */
+    val LEFT_CHIP_COLOR: Color = Color.Black
+
+    /** Optional outline color for chips in the left column. Null means use the fill color. */
+    val LEFT_CHIP_OUTLINE_COLOR: Color? = null
+
+    /** Fill color for chips in the right column. */
+    val RIGHT_CHIP_COLOR: Color = Color.White
+
+    /** Optional outline color for chips in the right column. Null means use the fill color. */
+    val RIGHT_CHIP_OUTLINE_COLOR: Color? = Color.Black
 }

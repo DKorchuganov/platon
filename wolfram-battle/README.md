@@ -91,7 +91,7 @@ http://localhost:8080/
 
 ## Configuring the grid
 
-The grid size and chip limit are in one file:
+The grid size, chip limit, and chip colors are in one file:
 
 ```text
 src/commonMain/kotlin/com/jvmlab/platon/wolfram/battle/model/GridConfig.kt
@@ -104,6 +104,10 @@ object GridConfig {
     const val ROWS: Int = 50
     const val COLUMNS: Int = 100
     const val MAX_CHIPS_PER_SIDE: Int = 10
+    val LEFT_CHIP_COLOR: Color = Color.Black
+    val LEFT_CHIP_OUTLINE_COLOR: Color? = null
+    val RIGHT_CHIP_COLOR: Color = Color.White
+    val RIGHT_CHIP_OUTLINE_COLOR: Color? = Color.Black
 }
 ```
 

@@ -170,11 +170,15 @@ Comments should explain why the code exists and what important Compose or browse
 
 Important board values must be easy to find and change.
 
-The grid size and chip limit must be stored in one configuration object:
+The grid size, chip limit, and chip colors must be stored in one configuration object:
 
 - `GridConfig.ROWS`
 - `GridConfig.COLUMNS`
 - `GridConfig.MAX_CHIPS_PER_SIDE`
+- `GridConfig.LEFT_CHIP_COLOR`
+- `GridConfig.LEFT_CHIP_OUTLINE_COLOR`
+- `GridConfig.RIGHT_CHIP_COLOR`
+- `GridConfig.RIGHT_CHIP_OUTLINE_COLOR`
 
 ### 5.5 Simple UI
 

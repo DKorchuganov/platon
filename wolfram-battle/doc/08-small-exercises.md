@@ -55,7 +55,25 @@ Change the browser tab title.
 
 Run the app again.
 
-## Exercise 4: change grid line color
+## Exercise 4: change chip color
+
+Open [GridConfig.kt](../src/commonMain/kotlin/com/jvmlab/platon/wolfram/battle/model/GridConfig.kt).
+
+Find:
+
+```kotlin
+val LEFT_CHIP_COLOR: Color = Color.Black
+```
+
+Try another color.
+
+For example:
+
+```kotlin
+val LEFT_CHIP_COLOR: Color = Color.DarkGray
+```
+
+## Exercise 5: change grid line color
 
 Open [ChipGridCanvas.kt](../src/commonMain/kotlin/com/jvmlab/platon/wolfram/battle/components/ChipGridCanvas.kt).
 
@@ -73,7 +91,7 @@ For example:
 val thinLine = Color(0xFFE8E8E8)
 ```
 
-## Exercise 5: add a new status line
+## Exercise 6: add a new status line
 
 Open [App.kt](../src/commonMain/kotlin/com/jvmlab/platon/wolfram/battle/App.kt).
 

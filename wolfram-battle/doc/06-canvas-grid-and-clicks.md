@@ -60,7 +60,11 @@ This helps the user see the large board.
 
 Black chips are circles in the left column.
 
-White chips are white circles with a black outline in the right column.
+Right chips are white circles with a black outline.
+
+Left chips use their fill color as the outline because their configured outline color is `null`.
+
+Their colors come from [GridConfig.kt](../src/commonMain/kotlin/com/jvmlab/platon/wolfram/battle/model/GridConfig.kt).
 
 The chip radius is based on the current cell size:
 
