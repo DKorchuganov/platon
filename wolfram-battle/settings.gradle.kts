@@ -13,4 +13,4 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "chip-grid-compose-web"
+rootProject.name = "wolfram-battle"

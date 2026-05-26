@@ -88,15 +88,6 @@ fun WolframBattleApp() {
                     modifier = Modifier.fillMaxWidth(),
                     verticalArrangement = Arrangement.spacedBy(8.dp),
                 ) {
-                    Text(
-                        text = "Board: ${GridConfig.COLUMNS} columns × ${GridConfig.ROWS} rows. It resizes with the browser window.",
-                        fontSize = 14.sp,
-                    )
-                    Text(
-                        text = "Only the far-left and far-right columns accept chips.",
-                        fontSize = 14.sp,
-                    )
-
                     FlexibleBoard(
                         gridState = gridState,
                         onCellClicked = { position ->
