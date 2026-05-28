@@ -11,8 +11,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.dp
+import com.jvmlab.platon.wolfram.battle.model.BoardSide
 import com.jvmlab.platon.wolfram.battle.model.CellPosition
 import com.jvmlab.platon.wolfram.battle.model.ChipGridState
+import com.jvmlab.platon.wolfram.battle.model.ChipStyle
 import com.jvmlab.platon.wolfram.battle.model.GridConfig
 import kotlin.math.floor
 
@@ -125,31 +127,39 @@ private fun androidx.compose.ui.graphics.drawscope.DrawScope.drawChips(
     val radius = minOf(cellWidth, cellHeight) * 0.42f
     val leftColumnCenterX = cellWidth / 2f
     val rightColumnCenterX = canvasSize.width - cellWidth / 2f
-    val leftChipOutlineColor = GridConfig.LEFT_CHIP_OUTLINE_COLOR ?: GridConfig.LEFT_CHIP_COLOR
-    val rightChipOutlineColor = GridConfig.RIGHT_CHIP_OUTLINE_COLOR ?: GridConfig.RIGHT_CHIP_COLOR
 
-    state.blackChipRows.forEach { row ->
+    drawChipRows(
+        rows = state.rows(BoardSide.Left),
+        centerX = leftColumnCenterX,
+        cellHeight = cellHeight,
+        radius = radius,
+        style = GridConfig.LEFT_CHIP_STYLE,
+    )
+
+    drawChipRows(
+        rows = state.rows(BoardSide.Right),
+        centerX = rightColumnCenterX,
+        cellHeight = cellHeight,
+        radius = radius,
+        style = GridConfig.RIGHT_CHIP_STYLE,
+    )
+}
+
+private fun androidx.compose.ui.graphics.drawscope.DrawScope.drawChipRows(
+    rows: Set<Int>,
+    centerX: Float,
+    cellHeight: Float,
+    radius: Float,
+    style: ChipStyle,
+) {
+    rows.forEach { row ->
         val center = Offset(
-            x = leftColumnCenterX,
+            x = centerX,
             y = (row + 0.5f) * cellHeight,
         )
-        drawCircle(color = GridConfig.LEFT_CHIP_COLOR, radius = radius, center = center)
+        drawCircle(color = style.fillColor, radius = radius, center = center)
         drawCircle(
-            color = leftChipOutlineColor,
-            radius = radius,
-            center = center,
-            style = Stroke(width = 1.5f),
-        )
-    }
-
-    state.whiteChipRows.forEach { row ->
-        val center = Offset(
-            x = rightColumnCenterX,
-            y = (row + 0.5f) * cellHeight,
-        )
-        drawCircle(color = GridConfig.RIGHT_CHIP_COLOR, radius = radius, center = center)
-        drawCircle(
-            color = rightChipOutlineColor,
+            color = style.resolvedOutlineColor,
             radius = radius,
             center = center,
             style = Stroke(width = 1.5f),

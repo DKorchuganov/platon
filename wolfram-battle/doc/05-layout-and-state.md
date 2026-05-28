@@ -55,11 +55,11 @@ It is similar to saying: first status, then board.
 
 `StatusPanel()` shows:
 
-- black chip count
-- white chip count
+- left chip count
+- right chip count
 - last message
-- selected black rows
-- selected white rows
+- selected left rows
+- selected right rows
 - Clear button
 
 The Clear button uses this callback:

@@ -29,9 +29,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.jvmlab.platon.wolfram.battle.components.ChipGridCanvas
+import com.jvmlab.platon.wolfram.battle.model.BoardSide
 import com.jvmlab.platon.wolfram.battle.model.CellPosition
 import com.jvmlab.platon.wolfram.battle.model.ChipGridState
-import com.jvmlab.platon.wolfram.battle.model.Chip
 import com.jvmlab.platon.wolfram.battle.model.GridConfig
 
 /*
@@ -60,7 +60,7 @@ fun WolframBattleApp() {
      */
     var gridState by remember { mutableStateOf(ChipGridState()) }
     var message by remember {
-        mutableStateOf("Click the left edge column to toggle black chips, or the right edge column to toggle white chips.")
+        mutableStateOf("Click the left edge column to toggle left chips, or the right edge column to toggle right chips.")
     }
 
     // The whole page can scroll vertically if the browser window is short.
@@ -153,13 +153,13 @@ private fun StatusPanel(
     ) {
         Column(modifier = Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
             Text(
-                text = "Black chips: ${gridState.blackCount}/${GridConfig.MAX_CHIPS_PER_SIDE}    " +
-                    "White chips: ${gridState.whiteCount}/${GridConfig.MAX_CHIPS_PER_SIDE}",
+                text = "Left chips: ${gridState.count(BoardSide.Left)}/${GridConfig.MAX_CHIPS_PER_SIDE}    " +
+                    "Right chips: ${gridState.count(BoardSide.Right)}/${GridConfig.MAX_CHIPS_PER_SIDE}",
                 fontWeight = FontWeight.Bold,
             )
             Text(text = message)
-            Text(text = "Black rows: ${gridState.blackChipRows.toDisplayRows()}")
-            Text(text = "White rows: ${gridState.whiteChipRows.toDisplayRows()}")
+            Text(text = "Left rows: ${gridState.rows(BoardSide.Left).toDisplayRows()}")
+            Text(text = "Right rows: ${gridState.rows(BoardSide.Right).toDisplayRows()}")
         }
         Spacer(modifier = Modifier.width(16.dp))
         Button(onClick = onClear) {
@@ -182,11 +182,11 @@ private fun handleCellClick(
      * In messages for the user, rows and columns start from 1.
      */
     val toggleResult = when (position.column) {
-        0 -> currentState.toggle(Chip.Left, position.row)
-        GridConfig.COLUMNS - 1 -> currentState.toggle(Chip.Right, position.row)
+        0 -> currentState.toggle(BoardSide.Left, position.row)
+        GridConfig.COLUMNS - 1 -> currentState.toggle(BoardSide.Right, position.row)
         else -> return ClickResult(
             state = currentState,
-            message = "Column ${position.column + 1} is not playable. Use column 1 for black chips or column ${GridConfig.COLUMNS} for white chips.",
+            message = "Column ${position.column + 1} is not playable. Use column 1 for left chips or column ${GridConfig.COLUMNS} for right chips.",
         )
     }
 

@@ -41,8 +41,8 @@ The app shows a 100 × 50 grid.
 
 The user can:
 
-- click the left column to add or remove black chips
-- click the right column to add or remove white chips
+- click the left column to add or remove left-side chips
+- click the right column to add or remove right-side chips
 - put at most 10 chips on each side
 - clear the board
 

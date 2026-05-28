@@ -1,13 +1,14 @@
 package com.jvmlab.platon.wolfram.battle.model
 
 /*
- * There are only two chip positions in this app:
- * - chips in the left column
- * - chips in the right column
+ * A board side tells which playable column owns the chip.
  */
-enum class Chip {
-    Left,
-    Right,
+enum class BoardSide(
+    val label: String,
+    val sentenceLabel: String,
+) {
+    Left(label = "left", sentenceLabel = "Left"),
+    Right(label = "right", sentenceLabel = "Right"),
 }
 
 /*
@@ -20,81 +21,77 @@ data class ToggleResult(
 )
 
 /*
+ * One side only needs to remember which rows contain chips.
+ */
+data class BoardSideState(
+    val chipRows: Set<Int> = emptySet(),
+) {
+    val count: Int get() = chipRows.size
+
+    fun hasChip(row: Int): Boolean = row in chipRows
+
+    fun addChip(row: Int): BoardSideState = copy(chipRows = chipRows + row)
+
+    fun removeChip(row: Int): BoardSideState = copy(chipRows = chipRows - row)
+}
+
+/*
  * This class is the state of the board.
  *
  * We do not store every cell in the 100 × 50 grid.
- * We only need to remember which rows have chips in the left column
- * and which rows have chips in the right column.
+ * We only need to remember the state of each playable side.
  *
  * Sets are useful here because one row can either have a chip or not.
  */
 data class ChipGridState(
-    val blackChipRows: Set<Int> = emptySet(),
-    val whiteChipRows: Set<Int> = emptySet(),
+    val left: BoardSideState = BoardSideState(),
+    val right: BoardSideState = BoardSideState(),
 ) {
-    val blackCount: Int get() = blackChipRows.size
-    val whiteCount: Int get() = whiteChipRows.size
+    fun rows(side: BoardSide): Set<Int> = sideState(side).chipRows
 
-    fun toggle(chip: Chip, row: Int): ToggleResult {
+    fun count(side: BoardSide): Int = sideState(side).count
+
+    fun toggle(side: BoardSide, row: Int): ToggleResult {
         require(row in 0 until GridConfig.ROWS) {
             "Row must be between 0 and ${GridConfig.ROWS - 1}, but was $row"
         }
 
-        return when (chip) {
-            Chip.Left -> toggleBlack(row)
-            Chip.Right -> toggleWhite(row)
+        val currentSide = sideState(side)
+        val rowLabel = row + 1
+
+        // If the chip already exists, a click removes it.
+        if (currentSide.hasChip(row)) {
+            return ToggleResult(
+                state = withSideState(side, currentSide.removeChip(row)),
+                message = "Removed ${side.label} chip from row $rowLabel.",
+            )
         }
+
+        // If the side is full, do not add a new chip.
+        if (currentSide.count >= GridConfig.MAX_CHIPS_PER_SIDE) {
+            return ToggleResult(
+                state = this,
+                message = "${side.sentenceLabel} side already has ${GridConfig.MAX_CHIPS_PER_SIDE} chips. Remove one before adding another.",
+            )
+        }
+
+        return ToggleResult(
+            state = withSideState(side, currentSide.addChip(row)),
+            message = "Added ${side.label} chip to row $rowLabel.",
+        )
     }
 
     fun clear(): ChipGridState = ChipGridState()
 
-    private fun toggleBlack(row: Int): ToggleResult {
-        val rowLabel = row + 1
-
-        // If the chip already exists, a click removes it.
-        if (row in blackChipRows) {
-            return ToggleResult(
-                state = copy(blackChipRows = blackChipRows - row),
-                message = "Removed black chip from row $rowLabel.",
-            )
+    private fun sideState(side: BoardSide): BoardSideState =
+        when (side) {
+            BoardSide.Left -> left
+            BoardSide.Right -> right
         }
 
-        // If the side is full, do not add a new chip.
-        if (blackChipRows.size >= GridConfig.MAX_CHIPS_PER_SIDE) {
-            return ToggleResult(
-                state = this,
-                message = "Black side already has ${GridConfig.MAX_CHIPS_PER_SIDE} chips. Remove one before adding another.",
-            )
+    private fun withSideState(side: BoardSide, sideState: BoardSideState): ChipGridState =
+        when (side) {
+            BoardSide.Left -> copy(left = sideState)
+            BoardSide.Right -> copy(right = sideState)
         }
-
-        return ToggleResult(
-            state = copy(blackChipRows = blackChipRows + row),
-            message = "Added black chip to row $rowLabel.",
-        )
-    }
-
-    private fun toggleWhite(row: Int): ToggleResult {
-        val rowLabel = row + 1
-
-        // If the chip already exists, a click removes it.
-        if (row in whiteChipRows) {
-            return ToggleResult(
-                state = copy(whiteChipRows = whiteChipRows - row),
-                message = "Removed white chip from row $rowLabel.",
-            )
-        }
-
-        // If the side is full, do not add a new chip.
-        if (whiteChipRows.size >= GridConfig.MAX_CHIPS_PER_SIDE) {
-            return ToggleResult(
-                state = this,
-                message = "White side already has ${GridConfig.MAX_CHIPS_PER_SIDE} chips. Remove one before adding another.",
-            )
-        }
-
-        return ToggleResult(
-            state = copy(whiteChipRows = whiteChipRows + row),
-            message = "Added white chip to row $rowLabel.",
-        )
-    }
 }

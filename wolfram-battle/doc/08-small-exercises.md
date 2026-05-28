@@ -22,7 +22,7 @@ const val MAX_CHIPS_PER_SIDE: Int = 5
 
 Run the app.
 
-Try to add 6 black chips.
+Try to add 6 left-side chips.
 
 You should see a message that the side is full.
 
@@ -62,7 +62,7 @@ Open [GridConfig.kt](../src/commonMain/kotlin/com/jvmlab/platon/wolfram/battle/m
 Find:
 
 ```kotlin
-val LEFT_CHIP_COLOR: Color = Color.Black
+val LEFT_CHIP_STYLE: ChipStyle = ChipStyle(fillColor = Color.Black)
 ```
 
 Try another color.
@@ -70,7 +70,7 @@ Try another color.
 For example:
 
 ```kotlin
-val LEFT_CHIP_COLOR: Color = Color.DarkGray
+val LEFT_CHIP_STYLE: ChipStyle = ChipStyle(fillColor = Color.DarkGray)
 ```
 
 ## Exercise 5: change grid line color
@@ -102,7 +102,7 @@ Add another `Text(...)` line inside the `Column`.
 For example:
 
 ```kotlin
-Text(text = "Total chips: ${gridState.blackCount + gridState.whiteCount}")
+Text(text = "Total chips: ${gridState.count(BoardSide.Left) + gridState.count(BoardSide.Right)}")
 ```
 
 Run the app and test it.

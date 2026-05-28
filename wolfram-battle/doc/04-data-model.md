@@ -10,13 +10,18 @@ The model files are here:
 
 ## GridConfig
 
-[GridConfig.kt](../src/commonMain/kotlin/com/jvmlab/platon/wolfram/battle/model/GridConfig.kt) stores the important numbers:
+[GridConfig.kt](../src/commonMain/kotlin/com/jvmlab/platon/wolfram/battle/model/GridConfig.kt) stores the important board values:
 
 ```kotlin
 object GridConfig {
     const val ROWS: Int = 50
     const val COLUMNS: Int = 100
     const val MAX_CHIPS_PER_SIDE: Int = 10
+    val LEFT_CHIP_STYLE: ChipStyle = ChipStyle(fillColor = Color.Black)
+    val RIGHT_CHIP_STYLE: ChipStyle = ChipStyle(
+        fillColor = Color.White,
+        outlineColor = Color.Black,
+    )
 }
 ```
 
@@ -44,12 +49,12 @@ That means:
 
 The UI messages show user-friendly numbers from 1.
 
-## Chip
+## BoardSide
 
 [ChipGridState.kt](../src/commonMain/kotlin/com/jvmlab/platon/wolfram/battle/model/ChipGridState.kt) contains this enum:
 
 ```kotlin
-enum class Chip {
+enum class BoardSide {
     Left,
     Right,
 }
@@ -57,14 +62,24 @@ enum class Chip {
 
 It says which playable column the user clicked.
 
+## BoardSideState
+
+`BoardSideState` stores the rows that have chips for one side:
+
+```kotlin
+data class BoardSideState(
+    val chipRows: Set<Int> = emptySet(),
+)
+```
+
 ## ChipGridState
 
-`ChipGridState` stores the rows that have chips:
+`ChipGridState` stores the state for both playable sides:
 
 ```kotlin
 data class ChipGridState(
-    val blackChipRows: Set<Int> = emptySet(),
-    val whiteChipRows: Set<Int> = emptySet(),
+    val left: BoardSideState = BoardSideState(),
+    val right: BoardSideState = BoardSideState(),
 )
 ```
 

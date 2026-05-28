@@ -18,8 +18,8 @@ The app renders a landscape grid with:
 
 - 100 columns
 - 50 rows
-- up to 10 black chips in the left column
-- up to 10 white chips in the right column
+- up to 10 left-side chips in the left column
+- up to 10 right-side chips in the right column
 - mouse-click toggling
 - a Clear button
 - automatic resize when the browser window changes
@@ -91,7 +91,7 @@ http://localhost:8080/
 
 ## Configuring the grid
 
-The grid size, chip limit, and chip colors are in one file:
+The grid size, chip limit, and chip styles are in one file:
 
 ```text
 src/commonMain/kotlin/com/jvmlab/platon/wolfram/battle/model/GridConfig.kt
@@ -104,10 +104,11 @@ object GridConfig {
     const val ROWS: Int = 50
     const val COLUMNS: Int = 100
     const val MAX_CHIPS_PER_SIDE: Int = 10
-    val LEFT_CHIP_COLOR: Color = Color.Black
-    val LEFT_CHIP_OUTLINE_COLOR: Color? = null
-    val RIGHT_CHIP_COLOR: Color = Color.White
-    val RIGHT_CHIP_OUTLINE_COLOR: Color? = Color.Black
+    val LEFT_CHIP_STYLE: ChipStyle = ChipStyle(fillColor = Color.Black)
+    val RIGHT_CHIP_STYLE: ChipStyle = ChipStyle(
+        fillColor = Color.White,
+        outlineColor = Color.Black,
+    )
 }
 ```
 

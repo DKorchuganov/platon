@@ -36,7 +36,7 @@ The target user does **not** know web development yet:
 
 ## 3. Main user story
 
-As a user, I want to open a browser app and click on a grid, so that I can put black chips on the left side and white chips on the right side.
+As a user, I want to open a browser app and click on a grid, so that I can put chips on the left side and right side.
 
 ## 4. Functional requirements
 
@@ -89,39 +89,39 @@ The board must keep the correct 100 × 50 aspect ratio.
 
 Only two columns accept chips:
 
-- the far-left column accepts black chips
-- the far-right column accepts white chips
+- the far-left column accepts left-side chips
+- the far-right column accepts right-side chips
 
 Clicks in any other column must not add chips.
 
-### 4.7 Black chips
+### 4.7 Left-side chips
 
-The user can put black chips only in the far-left column.
+The user can put left-side chips only in the far-left column.
 
-The user can put at most 10 black chips.
+The user can put at most 10 left-side chips.
 
-Clicking an empty row in the left column adds a black chip.
+Clicking an empty row in the left column adds a left-side chip.
 
-Clicking a row that already has a black chip removes it.
+Clicking a row that already has a left-side chip removes it.
 
-### 4.8 White chips
+### 4.8 Right-side chips
 
-The user can put white chips only in the far-right column.
+The user can put right-side chips only in the far-right column.
 
-The user can put at most 10 white chips.
+The user can put at most 10 right-side chips.
 
-Clicking an empty row in the right column adds a white chip.
+Clicking an empty row in the right column adds a right-side chip.
 
-Clicking a row that already has a white chip removes it.
+Clicking a row that already has a right-side chip removes it.
 
 ### 4.9 Status panel
 
 The app must show:
 
-- current number of black chips
-- current number of white chips
-- rows that contain black chips
-- rows that contain white chips
+- current number of left-side chips
+- current number of right-side chips
+- rows that contain left-side chips
+- rows that contain right-side chips
 - a message after the last user action
 
 The browser page title must be `Wolfram Battle`.
@@ -170,15 +170,13 @@ Comments should explain why the code exists and what important Compose or browse
 
 Important board values must be easy to find and change.
 
-The grid size, chip limit, and chip colors must be stored in one configuration object:
+The grid size, chip limit, and chip styles must be stored in one configuration object:
 
 - `GridConfig.ROWS`
 - `GridConfig.COLUMNS`
 - `GridConfig.MAX_CHIPS_PER_SIDE`
-- `GridConfig.LEFT_CHIP_COLOR`
-- `GridConfig.LEFT_CHIP_OUTLINE_COLOR`
-- `GridConfig.RIGHT_CHIP_COLOR`
-- `GridConfig.RIGHT_CHIP_OUTLINE_COLOR`
+- `GridConfig.LEFT_CHIP_STYLE`
+- `GridConfig.RIGHT_CHIP_STYLE`
 
 ### 5.5 Simple UI
 
