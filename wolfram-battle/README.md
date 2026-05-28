@@ -22,6 +22,7 @@ The app renders a landscape grid with:
 - up to 10 right-side chips in the right column
 - mouse-click toggling
 - a Clear button
+- a three-part status panel for left chips, rules, and right chips
 - automatic resize when the browser window changes
 
 ## Important documents

@@ -123,6 +123,13 @@ The app must show:
 - rows that contain left-side chips
 - rows that contain right-side chips
 - a message after the last user action
+- game rules
+
+The status panel must have three parts:
+
+- the left part shows left-side chip information
+- the center part shows game rules, the last action message, and the Clear button
+- the right part shows right-side chip information
 
 The browser page title must be `Wolfram Battle`.
 

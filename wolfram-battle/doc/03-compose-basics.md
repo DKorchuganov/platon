@@ -16,7 +16,9 @@ private fun StatusPanel(
     onClear: () -> Unit,
 ) {
     Row {
-        Text("Left chips: ${gridState.count(BoardSide.Left)}")
+        SideStatusColumn(title = "Left side", ...)
+        Column { Text("Rules") }
+        SideStatusColumn(title = "Right side", ...)
     }
 }
 ```

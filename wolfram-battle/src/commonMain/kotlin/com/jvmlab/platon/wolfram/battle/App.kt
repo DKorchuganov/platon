@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -26,6 +25,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.jvmlab.platon.wolfram.battle.components.ChipGridCanvas
@@ -138,11 +138,10 @@ private fun StatusPanel(
     onClear: () -> Unit,
 ) {
     /*
-     * Row means: place children from left to right.
-     * Column means: place children from top to bottom.
-     *
-     * Modifier.weight(1f) tells the text column to take all free horizontal
-     * space, so the Clear button can stay on the right.
+     * The status panel has three columns:
+     * - left side state
+     * - game rules and actions
+     * - right side state
      */
     Row(
         modifier = Modifier
@@ -150,21 +149,85 @@ private fun StatusPanel(
             .background(Color.White)
             .padding(12.dp),
         verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(16.dp),
     ) {
-        Column(modifier = Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+        SideStatusColumn(
+            title = "Left side",
+            chipCount = gridState.count(BoardSide.Left),
+            rows = gridState.rows(BoardSide.Left),
+            modifier = Modifier.weight(1f),
+        )
+
+        Column(
+            modifier = Modifier.weight(1.4f),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(4.dp),
+        ) {
             Text(
-                text = "Left chips: ${gridState.count(BoardSide.Left)}/${GridConfig.MAX_CHIPS_PER_SIDE}    " +
-                    "Right chips: ${gridState.count(BoardSide.Right)}/${GridConfig.MAX_CHIPS_PER_SIDE}",
+                text = "Rules",
                 fontWeight = FontWeight.Bold,
             )
-            Text(text = message)
-            Text(text = "Left rows: ${gridState.rows(BoardSide.Left).toDisplayRows()}")
-            Text(text = "Right rows: ${gridState.rows(BoardSide.Right).toDisplayRows()}")
+            Text(
+                text = "Use column 1 for left chips and column ${GridConfig.COLUMNS} for right chips.",
+                textAlign = TextAlign.Start,
+                modifier = Modifier.fillMaxWidth(),
+            )
+            Text(
+                text = "Each side can hold ${GridConfig.MAX_CHIPS_PER_SIDE} chips.",
+                textAlign = TextAlign.Start,
+                modifier = Modifier.fillMaxWidth(),
+            )
+            Text(
+                text = message,
+                textAlign = TextAlign.Start,
+                modifier = Modifier.fillMaxWidth(),
+            )
+            Button(onClick = onClear) {
+                Text("Clear")
+            }
         }
-        Spacer(modifier = Modifier.width(16.dp))
-        Button(onClick = onClear) {
-            Text("Clear")
-        }
+
+        SideStatusColumn(
+            title = "Right side",
+            chipCount = gridState.count(BoardSide.Right),
+            rows = gridState.rows(BoardSide.Right),
+            modifier = Modifier.weight(1f),
+            textAlign = TextAlign.End,
+            horizontalAlignment = Alignment.End,
+        )
+    }
+}
+
+@Composable
+private fun SideStatusColumn(
+    title: String,
+    chipCount: Int,
+    rows: Set<Int>,
+    modifier: Modifier = Modifier,
+    textAlign: TextAlign = TextAlign.Start,
+    horizontalAlignment: Alignment.Horizontal = Alignment.Start,
+) {
+    Column(
+        modifier = modifier,
+        horizontalAlignment = horizontalAlignment,
+        verticalArrangement = Arrangement.spacedBy(4.dp),
+    ) {
+        Text(
+            text = title,
+            fontWeight = FontWeight.Bold,
+            textAlign = textAlign,
+            modifier = Modifier.fillMaxWidth(),
+        )
+        Text(
+            text = "Chips: $chipCount/${GridConfig.MAX_CHIPS_PER_SIDE}",
+            textAlign = textAlign,
+            modifier = Modifier.fillMaxWidth(),
+        )
+        Text(
+            text = "Rows: ${rows.toDisplayRows()}",
+            textAlign = textAlign,
+            modifier = Modifier.fillMaxWidth(),
+        )
     }
 }
 

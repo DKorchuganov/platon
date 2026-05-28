@@ -60,7 +60,14 @@ It is similar to saying: first status, then board.
 - last message
 - selected left rows
 - selected right rows
+- game rules
 - Clear button
+
+It uses three columns:
+
+- left column: left-side chip count and rows
+- center column: game rules, last message, and Clear button
+- right column: right-side chip count and rows
 
 The Clear button uses this callback:
 
