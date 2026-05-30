@@ -22,7 +22,7 @@ import com.jvmlab.platon.wolfram.battle.model.GridConfig
 @Composable
 fun StatusPanel(
     gridState: ChipGridState,
-    message: String,
+    boardMessage: BoardMessage,
     onClear: () -> Unit,
 ) {
     /*
@@ -43,6 +43,7 @@ fun StatusPanel(
             title = "Left side",
             chipCount = gridState.count(BoardSide.Left),
             rows = gridState.rows(BoardSide.Left),
+            message = if (boardMessage.side == BoardSide.Left || boardMessage.side == null) boardMessage.message else "",
             modifier = Modifier.Companion.weight(1f),
         )
 
@@ -76,6 +77,7 @@ fun StatusPanel(
             title = "Right side",
             chipCount = gridState.count(BoardSide.Right),
             rows = gridState.rows(BoardSide.Right),
+            message = if (boardMessage.side == BoardSide.Right || boardMessage.side == null) boardMessage.message else "",
             modifier = Modifier.Companion.weight(1f),
             textAlign = TextAlign.Companion.End,
             horizontalAlignment = Alignment.Companion.End,

@@ -17,6 +17,7 @@ internal fun SideStatusColumn(
     title: String,
     chipCount: Int,
     rows: Set<Int>,
+    message: String,
     modifier: Modifier = Modifier.Companion,
     textAlign: TextAlign = TextAlign.Companion.Start,
     horizontalAlignment: Alignment.Horizontal = Alignment.Companion.Start,
@@ -39,6 +40,11 @@ internal fun SideStatusColumn(
         )
         Text(
             text = "Rows: ${rows.toDisplayRows()}",
+            textAlign = textAlign,
+            modifier = Modifier.Companion.fillMaxWidth(),
+        )
+        Text(
+            text = message,
             textAlign = textAlign,
             modifier = Modifier.Companion.fillMaxWidth(),
         )

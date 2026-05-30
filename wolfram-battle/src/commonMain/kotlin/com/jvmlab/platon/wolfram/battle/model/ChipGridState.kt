@@ -1,24 +1,6 @@
 package com.jvmlab.platon.wolfram.battle.model
 
-/*
- * A board side tells which playable column owns the chip.
- */
-enum class BoardSide(
-    val label: String,
-    val sentenceLabel: String,
-) {
-    Left(label = "left", sentenceLabel = "Left"),
-    Right(label = "right", sentenceLabel = "Right"),
-}
-
-/*
- * A small result object for user actions.
- * It contains the new state and a message to show in the UI.
- */
-data class ToggleResult(
-    val state: ChipGridState,
-    val message: String,
-)
+import com.jvmlab.platon.wolfram.battle.components.BoardMessage
 
 /*
  * One side only needs to remember which rows contain chips.
@@ -63,7 +45,7 @@ data class ChipGridState(
         if (currentSide.hasChip(row)) {
             return ToggleResult(
                 state = withSideState(side, currentSide.removeChip(row)),
-                message = "Removed ${side.label} chip from row $rowLabel.",
+                boardMessage = BoardMessage("Removed ${side.label} chip from row $rowLabel.", side)
             )
         }
 
@@ -71,13 +53,16 @@ data class ChipGridState(
         if (currentSide.count >= GridConfig.MAX_CHIPS_PER_SIDE) {
             return ToggleResult(
                 state = this,
-                message = "${side.sentenceLabel} side already has ${GridConfig.MAX_CHIPS_PER_SIDE} chips. Remove one before adding another.",
+                boardMessage = BoardMessage(
+                    "${side.sentenceLabel} side already has ${GridConfig.MAX_CHIPS_PER_SIDE} chips. Remove one before adding another.",
+                    side
+                )
             )
         }
 
         return ToggleResult(
             state = withSideState(side, currentSide.addChip(row)),
-            message = "Added ${side.label} chip to row $rowLabel.",
+            boardMessage = BoardMessage("Added ${side.label} chip to row $rowLabel.", side)
         )
     }
 
